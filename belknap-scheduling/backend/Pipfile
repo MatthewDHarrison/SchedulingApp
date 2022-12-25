@@ -4,6 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+flask = "*"
+apispec = "*"
+apispec-webframeworks = "*"
+flasgger = "*"
+setuptools = "*"
+marshmallow = "*"
 
 [dev-packages]
 

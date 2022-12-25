@@ -1,71 +1,43 @@
-from apispec import APISpec
-from apispec.ext.marshmallow import MarshmallowPlugin
-from apispec_webframeworks.flask import FlaskPlugin
-from flask import Flask, jsonify, render_template, send_from_directory
-from marshmallow import Schema, fields
-from werkzeug.utils import secure_filename
-
-companies = [{"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"}]
+from flask import Flask, request, jsonify
+import json
+import sqlite3 
 
 app = Flask(__name__)
 
-spec = APISpec(
-    title = 'flask-api-swagger-doc',
-    version = '1.0.0',
-    openapi_version = '3.0.2',
-    plugins = [FlaskPlugin(), MarshmallowPlugin()]
-)
+def db_connection():
+    conn = None
+    try:
+        conn = sqlite3.connect('schedule.sqlite')
+    except sqlite3.error as e:
+        print(e)
+    return conn
 
-@app.route('/api/swagger.json')
-def create_swagger_spec():
-    return jsonify(spec.to_dict())
+@app.route('/leaders', methods=['GET', 'POST'])
+def leaders():
+    conn = db_connection()
+    cursor = conn.cursor()
 
-class TodoResponseSchema(Schema):
-    id = fields.Int()
-    title = fields.Str()
-    status = fields.Boolean()
+    if request.method == 'GET':
+        cursor = conn.execute("SELECT * FROM leaders")
+        leaders = [
+            dict(id=row[0], name=row[1], position=row[2]) for row in cursor.fetchall()
+        ]
 
-class TodoListResponseSchema(Schema):
-    todo_list = fields.List(fields.Nested(TodoResponseSchema))
+        if leaders is not None:
+            return jsonify(leaders)
 
-@app.route('/todo')
-def todo():
-    """Get List of Todo
-        ---
-        get: 
-            description: Get List of Todos
-            response:
-                200:
-                    description: Return a todo list
-                    content: 
-                        application/json:
-                            schema: TodoListResponseSchema
-    """
-    dummy_data = [{
-        'id': 1,
-        'title': 'Finish this task',
-        'status': False
-    }, {
-        'id': 2,
-        'title': 'Finish that task',
-        'status': True
-        
-    }]
+    if request.method == 'POST':
+      
+        new_name = request.form['name']
+        new_position = request.form['position']
 
-    return TodoListResponseSchema().dump({'todo_list': dummy_data})
+        sql = """INSERT INTO leaders (name, position)
+                 VALUES (?, ?)"""
 
+        cursor = conn.execute(sql, (new_name, new_position))
+        conn.commit()
+       
+        return f"Leader w/ id: {cursor.lastrowid} added to db"
 
-with app.test_request_context():
-    spec.path(view=todo)
-
-
-@app.route('/companies', methods=['GET'])
-def get_companies():
-  return json.dumps(companies)
-
-@app.route('/companies', methods=['POST'])
-def post_companies():
-  return json.dumps({"success": True}), 201
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
