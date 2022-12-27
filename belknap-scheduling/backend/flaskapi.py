@@ -1,14 +1,15 @@
-from flask import Flask, request, jsonify
 import json
-from flask import render_template, url_for, flash, request, redirect, Response
+from flask import render_template, url_for, flash, request, redirect, Response, jsonify, Flask
 import sqlite3
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 import secrets
+import datetime
 
 
 app = Flask(__name__)
 secret = secrets.token_urlsafe(32)
 app.secret_key = secret
+
 
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
@@ -19,7 +20,7 @@ class User(UserMixin):
         self.id = id
         self.username = username
         self.password = password
-        self.authenticated = False    
+        self.authenticated = False   
     def is_active(self):
         return self.is_active()    
     def is_anonymous(self):
@@ -40,12 +41,26 @@ def db_connection():
     return conn
 
 
+
 @login_manager.user_loader
 def load_user(user_id):
     conn = db_connection()
     curs = conn.cursor()
     curs.execute("SELECT * from users where id = (?)",[user_id])
     lu = curs.fetchone()
+    if lu is None:
+        return None
+    else:
+        return User(int(lu[0]), lu[1], lu[2])
+
+@login_manager.request_loader
+def request_loader(request):
+    conn = db_connection()
+    curs = conn.cursor()
+    user_id = request.form.get('id')
+    curs.execute("SELECT * from users where id = (?)",[user_id])
+    lu = curs.fetchone()
+
     if lu is None:
         return None
     else:
@@ -62,18 +77,34 @@ def login():
 
     conn = db_connection()
     curs = conn.cursor()
+
+    # Get user with given username from database
     curs.execute("SELECT * FROM users where username = (?)", [login_username])
 
+    # store list of user data in user
     user = list(curs.fetchone())
+
+    # load User with user id
     Us = load_user(user[0])
+
+    # if User loaded has same username and password, login user
     if login_username == Us.username and login_password == Us.password:
-        login_user(Us, remember=True)
-        return f"Logged in successfully"
+        login_user(Us)
+        return str(Us.id)
     else:
         return f"Login failed"
 
+@app.route('/users/logout')
+def logout():
+    logout_user()
+    return 'Logged out'
+
+@login_manager.unauthorized_handler
+def unauthorized_handler():
+    return 'Unauthorized', 401
 
 @app.route('/leaders', methods=['GET', 'POST'])
+@login_required
 def leaders():
     conn = db_connection()
     cursor = conn.cursor()
