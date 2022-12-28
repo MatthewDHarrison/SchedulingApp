@@ -14,7 +14,19 @@ cursor = conn.cursor()
 sql_query2 = """ CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username text NOT NULL,
-    password text NOT NULL
+    password text NOT NULL,
+    fname text,
+    lname text,
+    yac INTEGER,
+    position text,
+    lifeguard BOOL,
+    ropes BOOL,
+    boat BOOL,
+    lund BOOL,
+    eddie BOOL,
+    bill BOOL,
+    nymcah BOOL,
+    wfa BOOL
 )"""
 
 # sq3 = """insert into users values(0, 'xyz@gmail.com','XYZ123abc')"""

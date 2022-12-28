@@ -1,41 +1,30 @@
-import LoginForm from "../components/LoginForm";
-import Alert from "@mui/material/Alert";
-import Container from "@mui/material/Container";
-import Collapse from "@mui/material/Collapse";
+import RegisterForm from "../components/RegisterForm";
 import { useNavigate } from "react-router-dom";
 import { ApiCall } from "../components/ApiCall";
 import React from "react";
+import Alert from "@mui/material/Alert";
+import Container from "@mui/material/Container";
+import Collapse from "@mui/material/Collapse";
 
-function Login() {
+function Register() {
     const navigate = useNavigate();
     const [showErrBlock, setShowErrBlock] = React.useState(false);
-    const handleBadLogin = (errStatus) => {
-        if (errStatus === "400") {
-            setShowErrBlock(true);
-        }
-    };
+
     return (
         <>
-            <LoginForm
+            <RegisterForm
                 submit={async (username, password) => {
                     const body = {
-                        // "email": "string",
                         username: username,
                         password: password,
                     };
-                    ApiCall("POST", "users/login", body, handleBadLogin).then(
+                    ApiCall("POST", "users/register", body).then(
                         (data) => {
+                            console.log(data);
                             if (data.uid >= 0) {
                                 localStorage.setItem("userId", data.uid);
                                 console.log(data)
-                                if (data.uid == 1) {
-                                    navigate("/admin");
-                                } 
-                                if (data.yac == "None") {
-                                    navigate(`/profile/modify/`);
-                                } else {
-                                    navigate('/')
-                                }
+                                navigate(`/profile/modify/`);
                             } else {
                                 setShowErrBlock(true);
                             }
@@ -45,11 +34,11 @@ function Login() {
             />
             <Container component="main" maxWidth="xs">
                 <Collapse in={showErrBlock}>
-                    <Alert severity="error">Incorrect username or password!</Alert>
+                <Alert severity="error">This username is already taken!</Alert>
                 </Collapse>
             </Container>
         </>
     );
 }
 
-export default Login;
+export default Register;

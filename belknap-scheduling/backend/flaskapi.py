@@ -4,11 +4,13 @@ import sqlite3
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 import secrets
 import datetime
+from flask_cors import CORS
 
 
 app = Flask(__name__)
 secret = secrets.token_urlsafe(32)
 app.secret_key = secret
+CORS(app)
 
 
 login_manager = LoginManager(app)
@@ -16,11 +18,12 @@ login_manager.login_view = "login"
 
 
 class User(UserMixin):
-    def __init__(self, id, username, password):
+    def __init__(self, id, username, password, yac):
         self.id = id
         self.username = username
         self.password = password
         self.authenticated = False   
+        self.yac = yac
     def is_active(self):
         return self.is_active()    
     def is_anonymous(self):
@@ -31,6 +34,8 @@ class User(UserMixin):
         return True    
     def get_id(self):
         return self.id
+    def get_yac(self):
+        return self.yac
 
 def db_connection():
     conn = None
@@ -51,29 +56,29 @@ def load_user(user_id):
     if lu is None:
         return None
     else:
-        return User(int(lu[0]), lu[1], lu[2])
+        return User(int(lu[0]), lu[1], lu[2], lu[3])
 
 @login_manager.request_loader
 def request_loader(request):
     conn = db_connection()
     curs = conn.cursor()
-    user_id = request.form.get('id')
-    curs.execute("SELECT * from users where id = (?)",[user_id])
+    data = request.get_json()
+    print(data)
+    id = data['uid']
+    curs.execute("SELECT * from users where id = (?)",[id])
     lu = curs.fetchone()
 
     if lu is None:
         return None
     else:
-        return User(int(lu[0]), lu[1], lu[2])
+        return User(int(lu[0]), lu[1], lu[2], lu[3])
 
     
 @app.route("/users/login", methods=['POST'])
 def login():
-    if current_user.is_authenticated:
-        return f"User already autheticated"
-
-    login_username = request.form['username']
-    login_password = request.form['password']
+    data = request.get_json()
+    login_username = data['username']
+    login_password = data['password']
 
     conn = db_connection()
     curs = conn.cursor()
@@ -81,23 +86,32 @@ def login():
     # Get user with given username from database
     curs.execute("SELECT * FROM users where username = (?)", [login_username])
 
-    # store list of user data in user
-    user = list(curs.fetchone())
-
+    try:
+        # store list of user data in user if username is in database
+        user = list(curs.fetchone())
+    except:
+        # else, return error code
+        return jsonify({"uid": str(-1)}), 200
     # load User with user id
     Us = load_user(user[0])
-
+    print(login_password, Us.password)
     # if User loaded has same username and password, login user
     if login_username == Us.username and login_password == Us.password:
         login_user(Us)
-        return str(Us.id)
+        return jsonify({"uid": str(Us.id), "yac": str(Us.yac)}), 200
     else:
-        return f"Login failed"
+        return jsonify({"uid": str(-1)}), 200
 
-@app.route('/users/logout')
+@app.route('/users/logout', methods=['POST'])
+@login_required
 def logout():
-    logout_user()
-    return 'Logged out'
+    data = request.get_json()
+    username = data['username']
+    if (current_user.username == username and current_user.is_authenticated):
+        logout_user()
+        return 'Logged out'
+    else:
+        return 'Bad logout username'
 
 @login_manager.unauthorized_handler
 def unauthorized_handler():
@@ -137,8 +151,9 @@ def usersRegister():
         conn = db_connection()
         cursor = conn.cursor()
 
-        new_username = request.form['username']
-        new_password = request.form['password']
+        data = request.get_json()
+        new_username = data['username']
+        new_password = data['password']
 
         sql = """INSERT INTO users (username, password)
                     VALUES (?, ?)"""
@@ -146,7 +161,36 @@ def usersRegister():
         cursor = cursor.execute(sql, (new_username, new_password))
         conn.commit()
         
-        return f"Leader w/ id: {cursor.lastrowid} added to db"
+        return jsonify({"uid": str(cursor.lastrowid)}), 200
 
+@app.route('/users/update', methods=['PUT'])
+@login_required
+def usersUpdate():
+    if request.method == 'PUT':
+        conn = db_connection()
+        cursor = conn.cursor()
+
+        data = request.get_json()
+        id = data['uid']
+        fname = data['fname']
+        lname = data['lname']
+        position = data['position']
+        yac = data['yac']
+        lifeguard = data['lifeguard']
+        ropes = data['ropes']
+        boat = data['boat']
+        lund = data['lund']
+        eddie = data['eddie']
+        bill = data['bill']
+        nymcah = data['nymcah']
+        wfa = data['wfa']
+
+        statement = """ UPDATE users SET fname = ?, lname = ?, yac = ?, position = ?, lifeguard = ?, 
+                        ropes = ?, boat = ?, lund = ?, eddie = ?, bill = ?, nymcah = ?, wfa = ?  WHERE id = ? """
+
+        cursor.execute(statement, [fname, lname, position, yac, lifeguard, ropes, boat, lund, eddie, bill, nymcah, wfa, id])
+        conn.commit()
+
+        return jsonify({"uid": id}), 200
 if __name__ == "__main__":
     app.run(debug=True)

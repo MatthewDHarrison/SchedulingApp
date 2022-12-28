@@ -5,11 +5,13 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm({ submit }) {
+    const navigate = useNavigate();
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
-
+    
     const validateForm = () => {
         return username.length > 0 && password.length > 0;
     };
@@ -80,6 +82,16 @@ function LoginForm({ submit }) {
                         onClick={onSubmit}
                     >
                         Login
+                    </Button>
+                    <Typography component="p">Dont have an account?</Typography>
+                    <Button
+                        onClick={() => (navigate("/register"))}
+                        fullWidth
+                        variant="contained"
+                        size="large"
+                        style={{ borderRadius: 50 }}
+                    >
+                        Register
                     </Button>
                 </Box>
             </Container>

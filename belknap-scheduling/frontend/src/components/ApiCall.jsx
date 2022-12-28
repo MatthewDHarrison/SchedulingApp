@@ -8,16 +8,16 @@ export const ApiCall = async (
     errorCallback = defaultError
 ) => {
     try {
+        console.log(body)
         const payload = {
             method: method,
             headers: {
                 "Content-type": "application/json",
-                token: `${localStorage.getItem("token")}`,
             },
 
             body: body === undefined ? undefined : JSON.stringify(body),
         };
-        const path = `http://localhost:${9090}/${page}`;
+        const path = `http://localhost:${5000}/${page}`;
         const response = await fetch(path, payload);
         if (response.status === "403") {
             localStorage.removeItem("token");
