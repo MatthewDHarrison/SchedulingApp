@@ -34,7 +34,7 @@ function Register() {
             />
             <Container component="main" maxWidth="xs">
                 <Collapse in={showErrBlock}>
-                <Alert severity="error">This username is already taken!</Alert>
+                <Alert severity="error" sx={{borderRadius: "10px"}}>This username is already taken!</Alert>
                 </Collapse>
             </Container>
         </>

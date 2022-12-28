@@ -117,34 +117,6 @@ def logout():
 def unauthorized_handler():
     return 'Unauthorized', 401
 
-@app.route('/leaders', methods=['GET', 'POST'])
-@login_required
-def leaders():
-    conn = db_connection()
-    cursor = conn.cursor()
-
-    if request.method == 'GET':
-        cursor = conn.execute("SELECT * FROM leaders")
-        leaders = [
-            dict(id=row[0], name=row[1], position=row[2]) for row in cursor.fetchall()
-        ]
-
-        if leaders is not None:
-            return jsonify(leaders)
-
-    if request.method == 'POST':
-      
-        new_name = request.form['name']
-        new_position = request.form['position']
-
-        sql = """INSERT INTO leaders (name, position)
-                 VALUES (?, ?)"""
-
-        cursor = conn.execute(sql, (new_name, new_position))
-        conn.commit()
-       
-        return f"Leader w/ id: {cursor.lastrowid} added to db"
-
 @app.route('/users/register', methods=['POST'])
 def usersRegister():
     if request.method == 'POST':
@@ -154,6 +126,12 @@ def usersRegister():
         data = request.get_json()
         new_username = data['username']
         new_password = data['password']
+
+        cursor.execute("SELECT * FROM users where username = (?)", [new_username])
+
+        user = cursor.fetchone()
+        if user is not None:
+            return jsonify({"uid": -1}), 200
 
         sql = """INSERT INTO users (username, password)
                     VALUES (?, ?)"""

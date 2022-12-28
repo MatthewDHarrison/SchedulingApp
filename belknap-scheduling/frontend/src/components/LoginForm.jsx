@@ -78,7 +78,6 @@ function LoginForm({ submit }) {
                         sx={{ mt: 3, mb: 2 }}
                         disabled={!validateForm()}
                         size="large"
-                        style={{ borderRadius: 50 }}
                         onClick={onSubmit}
                     >
                         Login
@@ -89,7 +88,6 @@ function LoginForm({ submit }) {
                         fullWidth
                         variant="contained"
                         size="large"
-                        style={{ borderRadius: 50 }}
                     >
                         Register
                     </Button>

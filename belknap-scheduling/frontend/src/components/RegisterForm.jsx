@@ -99,7 +99,7 @@ return (
                     }
                     xs={12}
                 >
-                    <Alert severity="error" style={{ borderRadius: 50 }}>
+                    <Alert severity="error">
                         Password must be at least 8 letters, include one Uppercase
                         letter, one Lowercase letter, one numeral, and one special
                         character.
@@ -127,7 +127,7 @@ return (
                     }
                     xs={12}
                 >
-                    <Alert severity="error" style={{ borderRadius: 50 }}>
+                    <Alert severity="error">
                         Passwords do not match.
                     </Alert>
                 </Grid>
@@ -139,7 +139,7 @@ return (
                 sx={{ mt: 3, mb: 2 }}
                 disabled={!validateForm()}
                 size="large"
-                style={{ borderRadius: 50 }}
+
                 onClick={onSubmit}
             >
                 Register
@@ -150,7 +150,7 @@ return (
                 fullWidth
                 variant="contained"
                 size="large"
-                style={{ borderRadius: 50 }}
+
             >
                 Login
             </Button>

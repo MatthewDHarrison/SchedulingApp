@@ -45,7 +45,7 @@ function Login() {
             />
             <Container component="main" maxWidth="xs">
                 <Collapse in={showErrBlock}>
-                    <Alert severity="error">Incorrect username or password!</Alert>
+                    <Alert severity="error" sx={{borderRadius: "10px"}}>Incorrect username or password!</Alert>
                 </Collapse>
             </Container>
         </>
