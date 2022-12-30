@@ -154,6 +154,7 @@ def usersUpdate():
         lname = data['lname']
         position = data['position']
         yac = data['yac']
+        div = data['div']
         lifeguard = data['lifeguard']
         ropes = data['ropes']
         boat = data['boat']
@@ -163,10 +164,10 @@ def usersUpdate():
         nymcah = data['nymcah']
         wfa = data['wfa']
 
-        statement = """ UPDATE users SET fname = ?, lname = ?, yac = ?, position = ?, lifeguard = ?, 
+        statement = """ UPDATE users SET fname = ?, lname = ?, yac = ?, position = ?, div = ?, lifeguard = ?, 
                         ropes = ?, boat = ?, lund = ?, eddie = ?, bill = ?, nymcah = ?, wfa = ?  WHERE id = ? """
 
-        cursor.execute(statement, [fname, lname, position, yac, lifeguard, ropes, boat, lund, eddie, bill, nymcah, wfa, id])
+        cursor.execute(statement, [fname, lname, yac, position, div, lifeguard, ropes, boat, lund, eddie, bill, nymcah, wfa, id])
         conn.commit()
 
         return jsonify({"uid": id}), 200

@@ -19,6 +19,7 @@ sql_query2 = """ CREATE TABLE users (
     lname text,
     yac INTEGER,
     position text,
+    div text,
     lifeguard BOOL,
     ropes BOOL,
     boat BOOL,

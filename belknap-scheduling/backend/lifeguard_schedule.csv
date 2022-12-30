@@ -1,0 +1,41 @@
+Day
+T1A,Certified,Alex Karpawich,Mac Katkavich,Nathan Fritz,Jackson Frampton,James Pirozzolo,Chuck Kent,Matt Lucey
+T1A,UnCertified,Timothy Haarmann,James Donnelly,Robert Hurley,Harry Dahl,Milo Wiebus,Marcus Trabucco
+W1A,Certified,Dacha Thurber,Harrison Flagg,Jackson Cruger,Jackson Frampton,Charlie Tantum,Andrei Caplow,Flynn Erickson,Zachary Trotzky
+W1A,UnCertified,Jude Laskey,Marcus Trabucco,Max Klein,Nolan Dickinson,Miles Tiberia,Dylan Roelofs
+H1A,Certified,Charlie Tantum,Alex Karpawich,Matt Lucey,Henry Kessler,Sava Thurber,Luke Farlie,Jack Carroll
+H1A,UnCertified,James Donnelly,Max Klein,Adrian Robinson,Frank Shediac,Jude Laskey,Harry Dahl,Timothy Haarmann,Robert Hurley
+F1A,Certified,Jack Sasaki,Chris Lynch,Alex Karpawich,James Pirozzolo,Jackson Cruger,Charlie Tantum,Sava Thurber,Lucas Hamilton
+F1A,UnCertified,Kaden Humphrey,Tim Browne,Henry Tantum,Milo Wiebus,Aidan Smith,Tim Butler
+S1A,Certified,Luke Farlie,James Pirozzolo,Ryan Trotzky,Mac Katkavich,Jack Sasaki,Harrison Flagg,Jackson Cruger
+S1A,UnCertified,Adrian Robinson,Owen Haber,Dylan Roelofs,Max Klein,Kaden Humphrey,Miles Tiberia,James Donnelly,Timothy Haarmann
+T2A,Certified,Thomas Mackey,Henry Kessler,Sava Thurber,Zachary Trotzky,Jack Sasaki,Chuck Kent,Nathan Fritz,Matt Lucey
+T2A,UnCertified,Miles Tiberia,Henry Tantum,Adrian Robinson,Jude Laskey,Harry Dahl
+W2A,Certified,Flynn Erickson,Charlie Tantum,Dacha Thurber,Harrison Flagg,Jackson Frampton,Andrei Caplow,Jack Carroll
+W2A,UnCertified,Dylan Roelofs,Timothy Haarmann,Adrian Robinson,Miles Tiberia,Jude Laskey,Owen Haber,Marcus Trabucco
+H2A,Certified,Dacha Thurber,Mac Katkavich,Lucas Hamilton,Matt Lucey,Chris Lynch,Jack Sasaki,Jack Carroll,Padraig Kinneen
+H2A,UnCertified,Robert Hurley,James Donnelly,Marcus Trabucco,Timothy Haarmann,Brady Daylor,Frank Shediac
+F2A,Certified,James Pirozzolo,Ryan Trotzky,Jackson Cruger,Owen Purinton,Luke Farlie,Nathan Fritz,Flynn Erickson
+F2A,UnCertified,Aidan Smith,Henry Tantum,Milo Wiebus,Kaden Humphrey,Tim Butler,Tim Browne,Brady Daylor
+M1P,Certified,Lucas Hamilton,Sava Thurber,Henry Kessler,Matt Lucey,Nathan Fritz,Chris Lynch,Alex Karpawich
+M1P,UnCertified,Miles Tiberia,Frank Shediac,Jude Laskey,Brady Daylor,Nolan Dickinson,Robert Hurley,Milo Wiebus
+T1P,Certified,Jackson Cruger,Zachary Trotzky,Thomas Mackey,Jackson Frampton,Andrei Caplow,Padraig Kinneen,Flynn Erickson
+T1P,UnCertified,Max Klein,Owen Haber,Dylan Roelofs,Nolan Dickinson,Henry Tantum,Frank Shediac,Robert Hurley,Adrian Robinson
+W1P,Certified,Thomas Mackey,Jack Carroll,Dacha Thurber,Padraig Kinneen,Harrison Flagg
+W1P,UnCertified,Miles Tiberia,Robert Hurley,Dylan Roelofs,Owen Haber,Timothy Haarmann,James Donnelly,Nolan Dickinson,Marcus Trabucco,Max Klein
+H1P,Certified,Matt Lucey,Chuck Kent,Chris Lynch,Owen Purinton,Harrison Flagg,James Pirozzolo,Charlie Tantum,Owen Purinton
+H1P,UnCertified,Harry Dahl,Tim Butler,Milo Wiebus,Brady Daylor,Aidan Smith,Tim Browne
+F1P,Certified,Chris Lynch,Ryan Trotzky,Mac Katkavich,Alex Karpawich,Flynn Erickson,Chuck Kent,Jack Sasaki
+F1P,UnCertified,Aidan Smith,Tim Butler,Kaden Humphrey,Milo Wiebus,Harry Dahl,Tim Browne,Henry Tantum
+S1P,Certified,Luke Farlie,Henry Kessler,Zachary Trotzky,Dacha Thurber,James Pirozzolo,Sava Thurber,Ryan Trotzky,Luke Farlie
+S1P,UnCertified,Tim Butler,Dylan Roelofs,Max Klein,Marcus Trabucco,Robert Hurley,Frank Shediac
+T2P,Certified,Andrei Caplow,Thomas Mackey,Padraig Kinneen,Zachary Trotzky,Jackson Cruger
+T2P,UnCertified,James Donnelly,Frank Shediac,Jude Laskey,Henry Tantum,Marcus Trabucco,Adrian Robinson,Miles Tiberia,Owen Haber,Nolan Dickinson
+W2P,Certified,Jack Carroll,Ryan Trotzky,Andrei Caplow,Thomas Mackey,Padraig Kinneen,Dacha Thurber,Charlie Tantum
+W2P,UnCertified,Timothy Haarmann,Adrian Robinson,Nolan Dickinson,Max Klein,Frank Shediac,Owen Haber,James Donnelly
+H2P,Certified,Mac Katkavich,Nathan Fritz,Owen Purinton,Lucas Hamilton,Chris Lynch,Henry Kessler,Chuck Kent
+H2P,UnCertified,Harry Dahl,Aidan Smith,Tim Butler,Tim Browne,Kaden Humphrey,Brady Daylor
+F2P,Certified,Alex Karpawich,Jackson Frampton,Jack Sasaki,Nathan Fritz,Chris Lynch,Lucas Hamilton,James Pirozzolo
+F2P,UnCertified,Tim Butler,Harry Dahl,Aidan Smith,Tim Browne,Brady Daylor,Kaden Humphrey,Milo Wiebus
+U2P,Certified,Henry Kessler,Jack Carroll,Lucas Hamilton,Flynn Erickson,Harrison Flagg,Padraig Kinneen,Owen Purinton,Thomas Mackey
+U2P,UnCertified,Kaden Humphrey,Brady Daylor,Aidan Smith,Jude Laskey,Tim Browne,Nolan Dickinson
