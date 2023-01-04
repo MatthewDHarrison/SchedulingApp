@@ -73,7 +73,7 @@ class Schedule:
         self.sched[key].append(guard)
         if guard not in self.guards:
             self.guards.append(guard)
-        guards.sort(key=getGuardNumCoverages)
+        self.guards.sort(key=getGuardNumCoverages)
         self.numGuards += 1
 
 
@@ -81,53 +81,11 @@ class Schedule:
         return len(self.sched[key])
 
     def sortGuards(self):
-        guards.sort(key=getGuardNumCoverages)
+        self.guards.sort(key=getGuardNumCoverages)
 
     def printGuards(self):
         for g in self.guards:
             print(g.name, g.div, g.numCoverages)
-
-keys = ['T1A', 'W1A', 'H1A', 'F1A', 'S1A', 'T2A', 'W2A', 'H2A', 'F2A']
-keys += ['M1P', 'T1P', 'W1P', 'H1P', 'F1P', 'S1P', 'T2P', 'W2P', 'H2P', 'F2P', 'U2P']
-
-conn = db_connection()
-cursor = conn.cursor()
-
-cursor.execute("SELECT fname, lname, lifeguard, position, div from users")
-
-rows = cursor.fetchall()
-guards = []
-print(rows)
-for row in rows:
-    if (row[0] != None and row[1] != None and row[2] != None and row[3] != None and row[4] != None):
-        guards.append(Guard(row[0] + ' ' + row[1], bool(row[2]), row[3], row[4]))
-
-for guard in guards:
-    guard.print()
-input()
-# Guard(row[0], True, row[2], row[3])
-
-
-
-certified = []
-uncertified = []
-numGuardsInDivs = [0, 0, 0, 0, 0]
-for g in guards:
-    if g.div == 'C':
-        numGuardsInDivs[0] += 1
-    elif g.div == 'J':
-        numGuardsInDivs[1] += 1
-    elif g.div == 'M':
-        numGuardsInDivs[2] += 1
-    elif g.div == 'B':
-        numGuardsInDivs[3] += 1
-    elif g.div == 'S':
-        numGuardsInDivs[4] += 1
-
-    if g.isCertified:
-        certified.append(g)
-    else:
-        uncertified.append(g)
 
 def countNumCertified(l):
     count = 0
@@ -182,9 +140,7 @@ def createRandSchedule(keys, guards):
                 r = random.randint(0, len(gs) - 1)
                 guard = gs[r]
                 if (guard not in schedule.sched[key] and (not key in guard.off)):
-                    print('adding ', guard.name, ' to ', key)
                     schedule.addGuard(guard, key)
-                    print(guard.numCoverages)
                     gs.remove(gs[r])
                     done = True
 
@@ -254,7 +210,6 @@ def findNeighborScheduleUncertified(schedule):
         foundValidRand = False
         while(not foundValidRand):
             if (time.time() >= time_start + 2):
-                print('breaking1')
                 break
             j = random.randint(0, len(copySchedule.keys) - 1)
             keyJ = copySchedule.keys[j]
@@ -262,7 +217,6 @@ def findNeighborScheduleUncertified(schedule):
                 foundValidRand2 = False
                 while(not foundValidRand2):
                     if (time.time() >= time_start + 2):
-                        print('breaking2')
                         break
                     k = random.randint(0, len(copySchedule.sched[keyJ]) - 1)
                     if (not copySchedule.sched[keyJ][k].isCertified and copySchedule.sched[keyJ][k].numCoverages > 6):
@@ -302,10 +256,9 @@ def simulatedAnnealing(schedule, costFunc, neighborFunc):
             if (costFunc(neighbor) < costFunc(schedule) or (random.uniform(0,1) <= ap)):
                 schedule = neighbor
         T *= alpha
-        print(costFunc(schedule))
     return schedule, costFunc(schedule)
 
-def addUncertified(schedule, uncertified):
+def addUncertified(schedule, uncertified, keys):
     guardsCopy = copy.deepcopy(uncertified)
     gs = []
     for guard in guardsCopy:
@@ -321,9 +274,7 @@ def addUncertified(schedule, uncertified):
                 r = random.randint(0, len(gs) - 1)
                 guard = gs[r]
                 if (guard not in schedule.sched[key] and (not key in guard.off)):
-                    print('adding ', guard.name, ' to ', key)
                     schedule.addGuard(guard, key)
-                    print(guard.numCoverages)
                     gs.remove(gs[r])
                     done = True
 
@@ -371,49 +322,103 @@ def tidySchedule(schedule):
     return schedule
 
 
-minCost = 1000
+def getSimAnnealedSchedule():
+    timestart = time.time()
+    keys = ['T1A', 'W1A', 'H1A', 'F1A', 'S1A', 'T2A', 'W2A', 'H2A', 'F2A']
+    keys += ['M1P', 'T1P', 'W1P', 'H1P', 'F1P', 'S1P', 'T2P', 'W2P', 'H2P', 'F2P', 'U2P']
 
-for i in range(0, 3):
-    s, c = simulatedAnnealing(createRandSchedule(keys, certified), costOfSchedule, findNeighborSchedule)
-    if c < minCost:
-        minCost = c
-        sAnnealed = s
-sAnnealed.print()
-sAnnealed.printGuards()
-print(minCost)
-sAllGuards = addUncertified(sAnnealed, uncertified)
-sAllGuards.print()
+    conn = db_connection()
+    cursor = conn.cursor()
 
-minCost = 1000
-sAllGuardsAnnealed = sAnnealed
-for i in range(0, 3):
-    s, c = simulatedAnnealing(sAnnealed, costOfScheduleUncertified, findNeighborScheduleUncertified)
-    if c < minCost:
-        minCost = c
-        sAllGuardsAnnealed = s
+    cursor.execute("SELECT fname, lname, lifeguard, position, div from users")
 
-sAllGuardsAnnealed.print()
-sAllGuardsAnnealed.printGuards()
-print('min cost: ', minCost)
+    rows = cursor.fetchall()
+    guards = []
+    for row in rows:
+        if (row[0] != None and row[1] != None and row[2] != None and row[3] != None and row[4] != None):
+            guards.append(Guard(row[0] + ' ' + row[1], bool(row[2]), row[3], row[4]))
 
-sAllGuardsAnnealedTidied = tidySchedule(sAllGuardsAnnealed)
-sAllGuardsAnnealedTidied.print()
-sAllGuardsAnnealedTidied.printGuards()
-print(costOfScheduleUncertified(sAllGuardsAnnealedTidied))
 
-with open('lifeguard_schedule.csv', 'w') as csvfile:
-    filewriter = csv.writer(csvfile, delimiter=',',
-                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
-    filewriter.writerow(['Day'])
-    div = 0
-    for i in range(0, len(keys)):
-        row = [keys[i], 'Certified']
-        for g in sAllGuardsAnnealed.sched[keys[i]]:
-            if (g.isCertified):
-                row.append(g.name)
-        filewriter.writerow(row)
-        row = [keys[i], 'UnCertified']
-        for g in sAllGuardsAnnealed.sched[keys[i]]:
-            if (not g.isCertified):
-                row.append(g.name)
-        filewriter.writerow(row)
+
+
+    certified = []
+    uncertified = []
+    numGuardsInDivs = [0, 0, 0, 0, 0]
+    for g in guards:
+        if g.div == 'C':
+            numGuardsInDivs[0] += 1
+        elif g.div == 'J':
+            numGuardsInDivs[1] += 1
+        elif g.div == 'M':
+            numGuardsInDivs[2] += 1
+        elif g.div == 'B':
+            numGuardsInDivs[3] += 1
+        elif g.div == 'S':
+            numGuardsInDivs[4] += 1
+
+        if g.isCertified:
+            certified.append(g)
+        else:
+            uncertified.append(g)
+
+    minCost = 1000
+
+    for i in range(0, 3):
+        s, c = simulatedAnnealing(createRandSchedule(keys, certified), costOfSchedule, findNeighborSchedule)
+        if c < minCost:
+            minCost = c
+            sAnnealed = s
+    # sAnnealed.print()
+    # sAnnealed.printGuards()
+    # print(minCost)
+    sAllGuards = addUncertified(sAnnealed, uncertified, keys)
+    # sAllGuards.print()
+
+    minCost = 1000
+    sAllGuardsAnnealed = sAnnealed
+    for i in range(0, 3):
+        s, c = simulatedAnnealing(sAnnealed, costOfScheduleUncertified, findNeighborScheduleUncertified)
+        if c < minCost:
+            minCost = c
+            sAllGuardsAnnealed = s
+
+    # sAllGuardsAnnealed.print()
+    # sAllGuardsAnnealed.printGuards()
+    # print('min cost: ', minCost)
+
+    sAllGuardsAnnealedTidied = tidySchedule(sAllGuardsAnnealed)
+    # sAllGuardsAnnealedTidied.print()
+    # sAllGuardsAnnealedTidied.printGuards()
+    print("min cost", costOfScheduleUncertified(sAllGuardsAnnealedTidied))
+    print("Finished in ", time.time() - timestart)
+    # with open('lifeguard_schedule.csv', 'w') as csvfile:
+    #     filewriter = csv.writer(csvfile, delimiter=',',
+    #                             quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    #     filewriter.writerow(['Day'])
+    #     div = 0
+    #     for i in range(0, len(keys)):
+    #         row = [keys[i], 'Certified']
+    #         for g in sAllGuardsAnnealed.sched[keys[i]]:
+    #             if (g.isCertified):
+    #                 row.append(g.name)
+    #         filewriter.writerow(row)
+    #         row = [keys[i], 'UnCertified']
+    #         for g in sAllGuardsAnnealed.sched[keys[i]]:
+    #             if (not g.isCertified):
+    #                 row.append(g.name)
+    #         filewriter.writerow(row)
+
+    for key in sAllGuardsAnnealedTidied.keys:
+        certs = ""
+        uncerts = ""
+        for guard in sAllGuardsAnnealedTidied.sched[key]:
+            if guard.isCertified:
+                certs += (guard.name + ',')
+            else:
+                uncerts += (guard.name + ',')
+        sql_query = """ INSERT INTO lg_sched (timeslot, certified, uncertified)
+                            VALUES (?, ?, ?)"""
+        
+        cursor = cursor.execute(sql_query, (key, certs, uncerts))
+
+        conn.commit()

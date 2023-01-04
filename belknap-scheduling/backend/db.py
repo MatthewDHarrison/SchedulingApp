@@ -11,26 +11,31 @@ cursor = conn.cursor()
 
 # cursor.execute(sql_query)
 
-sql_query2 = """ CREATE TABLE users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username text NOT NULL,
-    password text NOT NULL,
-    fname text,
-    lname text,
-    yac INTEGER,
-    position text,
-    div text,
-    lifeguard BOOL,
-    ropes BOOL,
-    boat BOOL,
-    lund BOOL,
-    eddie BOOL,
-    bill BOOL,
-    nymcah BOOL,
-    wfa BOOL
-)"""
+# sql_query2 = """ CREATE TABLE users (
+#     id INTEGER PRIMARY KEY AUTOINCREMENT,
+#     username text NOT NULL,
+#     password text NOT NULL,
+#     fname text,
+#     lname text,
+#     yac INTEGER,
+#     position text,
+#     div text,
+#     lifeguard BOOL,
+#     ropes BOOL,
+#     boat BOOL,
+#     lund BOOL,
+#     eddie BOOL,
+#     bill BOOL,
+#     nymcah BOOL,
+#     wfa BOOL
+# )"""
 
 # sq3 = """insert into users values(0, 'xyz@gmail.com','XYZ123abc')"""
 
-cursor.execute(sql_query2)
+sql_query = """ CREATE TABLE lg_sched (
+    timeslot text PRIMARY KEY NOT NULL,
+    certified text,
+    uncertified text
+)"""
+cursor.execute(sql_query)
 # cursor.execute(sq3)

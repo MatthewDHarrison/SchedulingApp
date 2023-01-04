@@ -5,6 +5,7 @@ from flask_login import LoginManager, UserMixin, login_required, login_user, log
 import secrets
 import datetime
 from flask_cors import CORS
+from lifeguardScheduling import getSimAnnealedSchedule
 
 
 app = Flask(__name__)
@@ -171,5 +172,23 @@ def usersUpdate():
         conn.commit()
 
         return jsonify({"uid": id}), 200
+
+@app.route('/admin/lifeguardSchedule', methods=['GET'])
+@login_required
+def makeLifeguardSchedule():
+    getSimAnnealedSchedule()
+    return jsonify({"users": []}), 200
+
+@app.route('/lifeguardSchedule', methods=['GET'])
+def getLifeguardSchedule():
+    conn = db_connection()
+    cursor = conn.cursor()
+
+    sql_query = """ SELECT * FROM lg_sched"""
+    cursor.execute(sql_query)
+
+    sched = cursor.fetchall()
+
+    return jsonify(sched), 200
 if __name__ == "__main__":
     app.run(debug=True)
