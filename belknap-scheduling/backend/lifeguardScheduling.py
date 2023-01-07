@@ -22,9 +22,9 @@ class Guard:
         self.div = div
         if DO == 'LIT':
             self.off = ['H1P', 'F1P', 'H2P', 'F2P', 'F1A', 'F2A']
-        elif (DO == '1L' or DO == '2L' or DO == '3L'):
+        elif (DO == '1L' or DO == '2L'):
             self.off = ['T1P', 'W1P', 'T2P', 'W2P', 'W1A', 'W2A']
-        elif DO == 'ADH':
+        elif DO == 'ADH' or DO == '3L':
             self.off = ['M1P', 'T1P', 'M2P', 'T2P', 'T1A', 'T2A']
         elif DO == 'DH':
             self.off = ['W1P', 'H1P', 'W2P', 'H2P', 'H1A', 'H2A']
@@ -116,6 +116,7 @@ def costOfScheduleUncertified(schedule):
             sum += 13 - len(schedule.sched[key])
         if len(schedule.sched[key]) > 14:
             sum += len(schedule.sched[key]) - 14
+        # sum += 3 * getNumFreeLeaders(key, schedule)
     for g in schedule.guards:
         if g.numCoverages < 5:
             sum += (5 - g.numCoverages)
@@ -128,10 +129,10 @@ def createRandSchedule(keys, guards):
     guardsCopy = copy.deepcopy(guards)
     gs = []
     for guard in guardsCopy:
-        for i in range(0, 9):
+        for i in range(0, 10):
             gs.append(guard)
     for key in keys:
-        for i in range(0, 7):
+        for i in range(0, 8):
             done = False
             time_start = time.time()
             while(not done):
@@ -246,6 +247,7 @@ def simulatedAnnealing(schedule, costFunc, neighborFunc):
     nIter = 100
     while (T > Tmin):
         for i in range(0, nIter):
+            # print(costFunc(schedule))
             if (costFunc(schedule) == 0):
                 return schedule, 0
             neighbor = neighborFunc(schedule)
@@ -298,7 +300,69 @@ def getHighestCovPeriodIncGuard(schedule, guard):
             max = len(schedule.sched[key])
     return maxKey
 
+def getGuardWithMostCovs(schedule, key):
+    max = 0
+    maxGuard = schedule.sched[key][0]
+    for guard in schedule.sched[key]:
+        if guard.numCoverages > max:
+            max = guard.numCoverages
+            maxGuard = guard
+    return maxGuard
+
+
+def removeGuardDiv(schedule, key, div):
+    l = len(schedule.sched[key])
+    for i in range(0, l):
+        if (schedule.sched[key][l - 1 - i].div == div):
+            schedule.sched[key][l - 1 - i].decrementNumCoverages() 
+            schedule.sched[key].remove(schedule.sched[key][l - 1 - i])
+            return
+
+def getNumExcessGuards(key, div, schedule):
+    # find number of leaders in given div that are not on day off 
+    numAvailableGuardsDiv = 0
+    for g in schedule.guards:
+        if (key not in g.off) and (g.div == div):
+            numAvailableGuardsDiv += 1
+    
+    # find number of leaders in given div that are scheduled for given period
+    numGuardsScheduledDiv = 0
+    for g in schedule.sched[key]:
+        if g.div == div:
+            numGuardsScheduledDiv += 1
+    
+    return (numAvailableGuardsDiv - numGuardsScheduledDiv)
+
 def tidySchedule(schedule):
+
+    divs = ['C', 'J', 'M', 'B', 'S']
+    for key in schedule.keys:
+        if (len(schedule.sched[key]) > 13):
+            for i in range(0, len(schedule.sched[key]) - 13):
+                g = getGuardWithMostCovs(schedule, key)
+                schedule.sched[key].remove(g)
+                g.decrementNumCoverages()
+
+        for i in range (0, 5):
+            # find number of leaders in given div that are not on day off 
+            numAvailableGuardsDiv = 0
+            for g in schedule.guards:
+                if (key not in g.off) and (g.div == divs[i]):
+                    numAvailableGuardsDiv += 1
+            
+            # find number of leaders in given div that are scheduled for given period
+            numGuardsScheduledDiv = 0
+            for g in schedule.sched[key]:
+                if g.div == divs[i]:
+                    numGuardsScheduledDiv += 1
+            
+            # if there is not at least 2 leaders not scheduled to lifeguard, alert here
+            if (numAvailableGuardsDiv - numGuardsScheduledDiv == 0):
+                removeGuardDiv(schedule, key, divs[i])
+                removeGuardDiv(schedule, key, divs[i])
+            elif (numAvailableGuardsDiv - numGuardsScheduledDiv == 1):
+                removeGuardDiv(schedule, key, divs[i])
+    
     for guard in schedule.guards:
         scheduleCopy = copy.deepcopy(schedule)
         if guard.numCoverages < 5:
@@ -308,18 +372,41 @@ def tidySchedule(schedule):
                     k = getLowestCoveragePeriod(scheduleCopy)
                     if k == '':
                         break
-                    if ((guard not in scheduleCopy.sched[k]) and (k not in guard.off)):
+                    if ((guard not in schedule.sched[k]) and (k not in guard.off) and (getNumExcessGuards(k, guard.div, schedule) > 2)):
                         schedule.addGuard(guard, k)
                         valid = True
                     else:
                         scheduleCopy.keys.remove(k)
                         scheduleCopy.sched.pop(k)
+
         if guard.numCoverages > 7:
             for i in range(0, guard.numCoverages - 7):
                 k = getHighestCovPeriodIncGuard(schedule, guard)
                 schedule.sched[k].remove(guard)
                 guard.decrementNumCoverages()
+
     return schedule
+
+def getNumFreeLeaders(key, schedule):
+    divs = ['C', 'J', 'M', 'B', 'S']
+    total = 0
+    for i in range (0, 5):
+        # find number of leaders in given div that are not on day off 
+        numAvailableGuardsDiv = 0
+        for g in schedule.guards:
+            if (key not in g.off) and (g.div == divs[i]):
+                numAvailableGuardsDiv += 1
+        
+        # find number of leaders in given div that are scheduled for given period
+        numGuardsScheduledDiv = 0
+        for g in schedule.sched[key]:
+            if g.div == divs[i]:
+                numGuardsScheduledDiv += 1
+        
+        # if there is not at least 2 leaders not scheduled to lifeguard, alert here
+        if (numAvailableGuardsDiv - numGuardsScheduledDiv < 2):
+            total += (3 - (numAvailableGuardsDiv - numGuardsScheduledDiv))
+    return total
 
 
 def getSimAnnealedSchedule():
@@ -329,7 +416,7 @@ def getSimAnnealedSchedule():
 
     conn = db_connection()
     cursor = conn.cursor()
-
+    cursor.execute("DELETE FROM lg_sched")
     cursor.execute("SELECT fname, lname, lifeguard, position, div from users")
 
     rows = cursor.fetchall()
@@ -385,12 +472,15 @@ def getSimAnnealedSchedule():
     # sAllGuardsAnnealed.print()
     # sAllGuardsAnnealed.printGuards()
     # print('min cost: ', minCost)
-
+    
+    # sAllGuardsAnnealed.printGuards()
+    # print("min cost", costOfScheduleUncertified(sAllGuardsAnnealed))
+    # print('')
     sAllGuardsAnnealedTidied = tidySchedule(sAllGuardsAnnealed)
     # sAllGuardsAnnealedTidied.print()
     # sAllGuardsAnnealedTidied.printGuards()
-    print("min cost", costOfScheduleUncertified(sAllGuardsAnnealedTidied))
-    print("Finished in ", time.time() - timestart)
+    # print("min cost", costOfScheduleUncertified(sAllGuardsAnnealedTidied))
+    # print("Finished in ", time.time() - timestart)
     # with open('lifeguard_schedule.csv', 'w') as csvfile:
     #     filewriter = csv.writer(csvfile, delimiter=',',
     #                             quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -408,7 +498,25 @@ def getSimAnnealedSchedule():
     #                 row.append(g.name)
     #         filewriter.writerow(row)
 
+    # divs = ['C', 'J', 'M', 'B', 'S']
     for key in sAllGuardsAnnealedTidied.keys:
+        # for i in range (0, 5):
+        #     # find number of leaders in given div that are not on day off 
+        #     numAvailableGuardsDiv = 0
+        #     for g in guards:
+        #         if (key not in g.off) and (g.div == divs[i]):
+        #             numAvailableGuardsDiv += 1
+            
+        #     # find number of leaders in given div that are scheduled for given period
+        #     numGuardsScheduledDiv = 0
+        #     for g in sAllGuardsAnnealedTidied.sched[key]:
+        #         if g.div == divs[i]:
+        #             numGuardsScheduledDiv += 1
+            
+        #     # if there is not at least 2 leaders not scheduled to lifeguard, alert here
+        #     if (numAvailableGuardsDiv - numGuardsScheduledDiv < 2):
+        #         print('Uh-oh! For timeslot ', key, ' too many leaders from div ', divs[i], ' are scheduled on the dock')
+
         certs = ""
         uncerts = ""
         for guard in sAllGuardsAnnealedTidied.sched[key]:

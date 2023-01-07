@@ -19,7 +19,6 @@ function Login() {
             <LoginForm
                 submit={async (username, password) => {
                     const body = {
-                        // "email": "string",
                         username: username,
                         password: password,
                     };
@@ -27,14 +26,13 @@ function Login() {
                         (data) => {
                             if (data.uid >= 0) {
                                 localStorage.setItem("userId", data.uid);
-                                console.log(data)
+                                console.log(localStorage.getItem("userId"))
                                 if (data.uid == 1) {
                                     navigate("/admin");
-                                } 
-                                if (data.yac == "None") {
+                                } else if (data.yac == "None") {
                                     navigate(`/profile/modify/`);
                                 } else {
-                                    navigate('/')
+                                    navigate('/lifeguardSchedule');
                                 }
                             } else {
                                 setShowErrBlock(true);

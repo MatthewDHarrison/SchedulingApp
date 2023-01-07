@@ -18,7 +18,7 @@ function LoginForm({ submit }) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        submit(username, password); // to be completed - send data to backend
+        submit(username, password); 
     };
 
     return (

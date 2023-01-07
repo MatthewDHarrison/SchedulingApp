@@ -173,11 +173,17 @@ def usersUpdate():
 
         return jsonify({"uid": id}), 200
 
-@app.route('/admin/lifeguardSchedule', methods=['GET'])
+@app.route('/admin/lifeguardSchedule', methods=['POST'])
 @login_required
 def makeLifeguardSchedule():
-    getSimAnnealedSchedule()
-    return jsonify({"users": []}), 200
+    data = request.get_json()
+    uid = data['uid']
+    if uid == '1':
+        print('here')
+        getSimAnnealedSchedule()
+        return jsonify({"users": []}), 200
+    else:
+        return jsonify({"err": "unauthorized call, admin only"}), 200
 
 @app.route('/lifeguardSchedule', methods=['GET'])
 def getLifeguardSchedule():

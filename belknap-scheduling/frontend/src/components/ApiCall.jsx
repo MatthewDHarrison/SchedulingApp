@@ -8,7 +8,6 @@ export const ApiCall = async (
     errorCallback = defaultError
 ) => {
     try {
-        console.log(body)
         const payload = {
             method: method,
             headers: {

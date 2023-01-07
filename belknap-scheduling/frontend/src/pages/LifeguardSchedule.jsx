@@ -39,17 +39,14 @@ export default function LifeguardSchedule() {
         })
     }, [])
 
-    React.useEffect(() => {
-        console.log(sched)
-    }, [sched])
     if (loaded) {
         return (
             <Container component="main" maxWidth="xl">
-                <Box sx={{ flexGrow: 1, p: 2, mt: 10}}
+                <Box sx={{ flexGrow: 1, p: 2, mt: 10, mb: 20}}
                         padding="40px"
                         borderRadius="10px"
                         backgroundColor="#ddd">
-                    <Typography align="center" variant="h2">Week {wk}</Typography>
+                    <Typography align="center" variant="h2">Lifeguarding Schedule Week {wk}</Typography>
                     <Grid
                         container
                         spacing={2}
@@ -79,7 +76,7 @@ export default function LifeguardSchedule() {
                         <Grid item xs={1}>A.M. G.S.</Grid>
 
                         {wk === 1 ? keys_1.slice(0,7).map((key, index) => (
-                        <Grid item key={index} xs={1} minHeight={400} sx={sched[key].certs.length > 0 ? {} : {bgcolor: '#333'}}>
+                        <Grid item key={index} xs={1} minHeight={400} sx={sched[key].certs.length > 0 ? {} : {bgcolor: '#555'}}>
                             <Stack>
                                 {sched[key].certs.slice(0, -1).map((name, i) => (
                                     <Typography sx={{fontWeight: 'bold'}}key={i}>
@@ -94,7 +91,7 @@ export default function LifeguardSchedule() {
                             </Stack>
                         </Grid>
                         )) : keys_2.slice(0,7).map((key, index) => (
-                        <Grid item key={index} xs={1} minHeight={400} sx={sched[key].certs.length > 0 ? {} : {bgcolor: '#333'}}>
+                        <Grid item key={index} xs={1} minHeight={400} sx={sched[key].certs.length > 0 ? {} : {bgcolor: '#555'}}>
 
                             <Stack>
                                 {sched[key].certs.slice(0, -1).map((name, i) => (
@@ -113,7 +110,7 @@ export default function LifeguardSchedule() {
                         <Grid item xs={1}>A.M. Cadet Beach</Grid>
 
                         {wk === 1 ? keys_1.slice(0,7).map((key, index) => (
-                        <Grid item key={index} xs={1} minHeight={30} sx={sched[key].certs.length > 0 ? {} : {bgcolor: '#333'}}>
+                        <Grid item key={index} xs={1} minHeight={30} sx={sched[key].certs.length > 0 ? {} : {bgcolor: '#555'}}>
                             <Stack>
                                 <Typography sx={{fontWeight: 'bold'}}>
                                     {sched[key].certs.slice(-1)}
@@ -124,7 +121,7 @@ export default function LifeguardSchedule() {
                             </Stack>
                         </Grid>
                         )) : keys_2.slice(0,7).map((key, index) => (
-                        <Grid item key={index} xs={1} minHeight={30} sx={sched[key].certs.length > 0 ? {} : {bgcolor: '#333'}}>
+                        <Grid item key={index} xs={1} minHeight={30} sx={sched[key].certs.length > 0 ? {} : {bgcolor: '#555'}}>
                             <Stack>
                             <Typography sx={{fontWeight: 'bold'}}>
                                     {sched[key].certs.slice(-1)}
@@ -138,7 +135,7 @@ export default function LifeguardSchedule() {
                         <Grid item xs={1}>P.M. G.S.</Grid>
 
                         {wk === 1 ? keys_1.slice(7,14).map((key, index) => (
-                        <Grid item key={index} xs={1} minHeight={400} sx={sched[key].certs.length > 0 ? {} : {bgcolor: '#333'}}>
+                        <Grid item key={index} xs={1} minHeight={400} sx={sched[key].certs.length > 0 ? {} : {bgcolor: '#555'}}>
                             <Stack>
                                 {sched[key].certs.slice(0, -1).map((name, i) => (
                                     <Typography sx={{fontWeight: 'bold'}}key={i}>
@@ -153,7 +150,7 @@ export default function LifeguardSchedule() {
                             </Stack>
                         </Grid>
                         )) : keys_2.slice(7,14).map((key, index) => (
-                        <Grid item key={index} xs={1} minHeight={400} sx={sched[key].certs.length > 0 ? {} : {bgcolor: '#333'}}>
+                        <Grid item key={index} xs={1} minHeight={400} sx={sched[key].certs.length > 0 ? {} : {bgcolor: '#555'}}>
                             <Stack>
                                 {sched[key].certs.slice(0, -1).map((name, i) => (
                                     <Typography sx={{fontWeight: 'bold'}}key={i}>
@@ -171,7 +168,7 @@ export default function LifeguardSchedule() {
                         <Grid item xs={1}>P.M. Cadet Beach</Grid>
 
                         {wk === 1 ? keys_1.slice(7,14).map((key, index) => (
-                        <Grid item key={index} xs={1} minHeight={30} sx={sched[key].certs.length > 0 ? {} : {bgcolor: '#333'}}>
+                        <Grid item key={index} xs={1} minHeight={30} sx={sched[key].certs.length > 0 ? {} : {bgcolor: '#555'}}>
                             <Stack>
                                 <Typography sx={{fontWeight: 'bold'}}>
                                     {sched[key].certs.slice(-1)}
@@ -182,7 +179,7 @@ export default function LifeguardSchedule() {
                             </Stack>
                         </Grid>
                         )) : keys_2.slice(7,14).map((key, index) => (
-                        <Grid item key={index} xs={1} minHeight={30} sx={sched[key].certs.length > 0 ? {} : {bgcolor: '#333'}}>
+                        <Grid item key={index} xs={1} minHeight={30} sx={sched[key].certs.length > 0 ? {} : {bgcolor: '#555'}}>
                             <Stack>
                             <Typography sx={{fontWeight: 'bold'}}>
                                     {sched[key].certs.slice(-1)}
