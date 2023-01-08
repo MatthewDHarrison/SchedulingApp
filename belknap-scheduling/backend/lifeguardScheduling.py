@@ -15,11 +15,12 @@ def db_connection():
 
 
 class Guard:
-    def __init__(self, name, isCertified, DO, div):
+    def __init__(self, name, isCertified, DO, div, id):
         self.name = name
         self.isCertified = isCertified
         self.numCoverages = 0
         self.div = div
+        self.id = id
         if DO == 'LIT':
             self.off = ['H1P', 'F1P', 'H2P', 'F2P', 'F1A', 'F2A']
         elif (DO == '1L' or DO == '2L'):
@@ -417,13 +418,13 @@ def getSimAnnealedSchedule():
     conn = db_connection()
     cursor = conn.cursor()
     cursor.execute("DELETE FROM lg_sched")
-    cursor.execute("SELECT fname, lname, lifeguard, position, div from users")
+    cursor.execute("SELECT fname, lname, lifeguard, position, div, id from users")
 
     rows = cursor.fetchall()
     guards = []
     for row in rows:
         if (row[0] != None and row[1] != None and row[2] != None and row[3] != None and row[4] != None):
-            guards.append(Guard(row[0] + ' ' + row[1], bool(row[2]), row[3], row[4]))
+            guards.append(Guard(row[0] + ' ' + row[1], bool(row[2]), row[3], row[4], row[5]))
 
 
 
@@ -517,16 +518,19 @@ def getSimAnnealedSchedule():
         #     if (numAvailableGuardsDiv - numGuardsScheduledDiv < 2):
         #         print('Uh-oh! For timeslot ', key, ' too many leaders from div ', divs[i], ' are scheduled on the dock')
 
-        certs = ""
-        uncerts = ""
+        # certs = ""
+        # uncerts = ""
         for guard in sAllGuardsAnnealedTidied.sched[key]:
-            if guard.isCertified:
-                certs += (guard.name + ',')
-            else:
-                uncerts += (guard.name + ',')
-        sql_query = """ INSERT INTO lg_sched (timeslot, certified, uncertified)
+            # if guard.isCertified:
+            #     certs += (guard.name + ',')
+            # else:
+            #     uncerts += (guard.name + ',')
+            sql_query = """ INSERT INTO lg_sched (timeslot, guardId, certified)
                             VALUES (?, ?, ?)"""
+            cursor = cursor.execute(sql_query, (key, guard.id, guard.isCertified))
+        # sql_query = """ INSERT INTO lg_sched (timeslot, certified, uncertified)
+        #                     VALUES (?, ?, ?)"""
         
-        cursor = cursor.execute(sql_query, (key, certs, uncerts))
+        
 
         conn.commit()

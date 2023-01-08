@@ -8,33 +8,43 @@ import Button from '@mui/material/Button';
 import { Stack } from '@mui/material';
 
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const keys = ['U1A', 'M1A', 'T1A', 'W1A', 'H1A', 'F1A', 'S1A', 'U1P', 'M1P', 
+              'T1P', 'W1P', 'H1P', 'F1P', 'S1P', 'U2A', 'M2A', 'T2A', 'W2A', 
+              'H2A', 'F2A', 'S2A', 'U2P', 'M2P', 'T2P', 'W2P', 'H2P', 'F2P', 'S2P']
+
 const keys_1 = ['U1A', 'M1A', 'T1A', 'W1A', 'H1A', 'F1A', 'S1A', 'U1P', 'M1P', 'T1P', 'W1P', 'H1P', 'F1P', 'S1P']
 const keys_2 = ['U2A', 'M2A', 'T2A', 'W2A', 'H2A', 'F2A', 'S2A', 'U2P', 'M2P', 'T2P', 'W2P', 'H2P', 'F2P', 'S2P']
 
+
 export default function LifeguardSchedule() {
     const [wk, setWk] = React.useState(1);
-    const [sched, setSched] = React.useState({'U1A': {certs: [], uncerts: []},
-                                              'U1P': {certs: [], uncerts: []},
-                                              'M1A': {certs: [], uncerts: []},
-                                              'U2A': {certs: [], uncerts: []},
-                                              'M2A': {certs: [], uncerts: []},
-                                              'M2P': {certs: [], uncerts: []},
-                                              'S2A': {certs: [], uncerts: []},
-                                              'S2P': {certs: [], uncerts: []}});
+    const [sched, setSched] = React.useState(Object.fromEntries(keys.map(k => [k, {certs: [], uncerts: []}])));
     const [loaded, setLoaded] = React.useState(false);
+    const dataFetchedRef = React.useRef(false);
 
     React.useEffect(() => {
+        if (dataFetchedRef.current) return;
+        dataFetchedRef.current = true;
+        
         ApiCall(
             "GET",
             `lifeguardSchedule`
         ).then((data) => {
-            for (let i = 0; i < data.length; i++) {
-                let temp = sched;
-                let certs_ray = data[i][1].split(",").slice(0, -1);
-                let uncerts_ray = data[i][2].split(",").slice(0, -1);
-                temp[data[i][0]] = {certs: certs_ray, uncerts: uncerts_ray};
-                setSched(temp)
-            }
+            if (!loaded) {
+                for (let i = 0; i < data.length; i++) {
+                    let temp = sched;
+                    // let certs_ray = data[i][1].split(",").slice(0, -1);
+                    // let uncerts_ray = data[i][2].split(",").slice(0, -1);
+                    // temp[data[i][0]] = {certs: certs_ray, uncerts: uncerts_ray};
+                    if (data[i][4]) {
+                        temp[data[i][1]].certs.push(data[i][2] + ' ' + data[i][3])
+                    } else {
+                        temp[data[i][1]].uncerts.push(data[i][2] + ' ' + data[i][3])
+                    }
+                    setSched(temp)
+                }
+            }    
+            console.log(sched);
             setLoaded(true);
         })
     }, [])

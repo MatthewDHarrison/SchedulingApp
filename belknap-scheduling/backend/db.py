@@ -32,10 +32,14 @@ cursor = conn.cursor()
 
 # sq3 = """insert into users values(0, 'xyz@gmail.com','XYZ123abc')"""
 
+
 sql_query = """ CREATE TABLE lg_sched (
-    timeslot text PRIMARY KEY NOT NULL,
-    certified text,
-    uncertified text
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    timeslot text NOT NULL,
+    guardId INTEGER references users (id),
+    certified BOOL references users (lifeguard)
 )"""
+
 cursor.execute(sql_query)
+
 # cursor.execute(sq3)

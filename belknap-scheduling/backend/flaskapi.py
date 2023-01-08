@@ -190,7 +190,8 @@ def getLifeguardSchedule():
     conn = db_connection()
     cursor = conn.cursor()
 
-    sql_query = """ SELECT * FROM lg_sched"""
+    sql_query = """ SELECT lg_sched.id, lg_sched.timeslot, users.fname, users.lname, lg_sched.certified FROM lg_sched, users
+    WHERE lg_sched.guardId = users.id """
     cursor.execute(sql_query)
 
     sched = cursor.fetchall()
