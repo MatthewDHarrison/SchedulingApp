@@ -20,6 +20,7 @@ class Guard:
         self.isCertified = isCertified
         self.numCoverages = 0
         self.div = div
+        self.position = DO
         self.id = id
         if DO == 'LIT':
             self.off = ['H1P', 'F1P', 'H2P', 'F2P', 'F1A', 'F2A']
@@ -409,6 +410,19 @@ def getNumFreeLeaders(key, schedule):
             total += (3 - (numAvailableGuardsDiv - numGuardsScheduledDiv))
     return total
 
+def hierarchy(g):
+    if g.position == "LIT":
+        return 0
+    elif g.position == "1L":
+        return 1
+    elif g.position == "2L": 
+        return 2
+    elif g.position == "3L":
+        return 3
+    elif g.position == "ADH":
+        return 4
+    elif g.position == "DH":
+        return 5
 
 def getSimAnnealedSchedule():
     timestart = time.time()
@@ -520,6 +534,8 @@ def getSimAnnealedSchedule():
 
         # certs = ""
         # uncerts = ""
+        sAllGuardsAnnealedTidied.sched[key].sort(key=hierarchy)
+
         for guard in sAllGuardsAnnealedTidied.sched[key]:
             # if guard.isCertified:
             #     certs += (guard.name + ',')
