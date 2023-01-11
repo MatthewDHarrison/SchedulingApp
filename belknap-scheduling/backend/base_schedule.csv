@@ -1,0 +1,354 @@
+Timeslot,Period,,# of Div,C,J,M,B,S,Leader,LC
+T11,16 Archery,,3,,,1,1,1,2,
+T11,16 Soccer (Clark 1&2),,3,,,1,1,1,2,
+T11,Arts CJ,,3,1,1,1,,,1,1
+T11,Basketball C (Jr. Courts),,1,1,,,,,1,
+T11,Basketball MBS (Pavilion),,3,,,1,1,1,1,1
+T11,Crafts CJ,,2,1,1,,,,1,1
+T11,Fish JMBS,,4,,1,1,1,1,2,1
+T11,Football CJM (Messer),,3,1,1,1,,,1,1
+T11,Kickball CJ (Cadet Field),,2,1,1,,,,1,1
+T11,Minnow JMBS,,4,,1,1,1,1,2,
+T11,Riflery S,,1,,,,,1,2,
+T11,Ropes CJ,,2,1,1,,,,2,
+T11,Sailing MBS,,3,,,1,1,1,2,3
+T11,Street Hockey CJ (Jr. Courts),,2,1,1,,,,1,1
+T11,Studio Art MB,,2,,,1,1,,1,
+T11,Tennis MBS (Sr. Courts),,3,,,1,1,1,1,1
+T11,Tower C,,1,1,,,,,2,
+T11,Volleyball BS (Cadet Beach),,2,,,,1,1,2,
+T11,Waterskiing J,,1,,1,,,,2,1
+T11,Nature M ,,1,,,1,,,1,
+T12,12 Baseball (Messer Field),,3,1,1,1,,,2,
+T12,16 Riflery,,3,,,1,1,1,2,
+T12,Archery C,,1,1,,,,,2,
+T12,Crafts MBS,,3,,,1,1,1,2,1
+T12,Crosstraining S,,1,,,,,1,1,
+T12,FF/S CJMBS,,5,1,1,1,1,1,2,1
+T12,Fish JMBS,,4,,1,1,1,1,2,2
+T12,Lacrosse BS (Clark 3),,2,,,,1,1,1,1
+T12,Nature CJ,,2,1,1,,,,1,1
+T12,Pickleball CJ (Besserer Courts),,2,1,1,,,,1,1
+T12,Woodworking CJ,,2,1,1,,,,1,
+T12,Ropes BS,,2,,,,1,1,2,
+T12,Sailing CJM,,3,1,1,1,,,2,2
+T12,Soccer CJM (Clark 1&2),,3,1,1,1,,,2,1
+T12,Street Hockey BS (Sr. Courts),,2,,,,1,1,1,1
+T12,Tower B,,1,,,,1,,2,
+T12,Ultimate MBS (Clark 4),,3,,,1,1,1,1,1
+T12,Volleyball CJM (Cadet Beach),,3,1,1,1,,,2,1
+T12,Waterskiing M,,1,,,1,,,2,
+T13,12 Tennis (Besserer Court),,3,1,1,1,,,2,
+T13,16 Basketball (Pavilion),,3,,,1,1,1,2,
+T13,16 Tennis (Sr. Court),,3,,,1,1,1,2,
+T13,Archery M,,1,,,1,,,2,
+T13,Arts BS,,2,,,,1,1,1,1
+T13,Baseball MBS (Clark 4),,3,,,1,1,1,1,1
+T13,Basketball CJ (Jr. Courts),,2,1,1,,,,1,1
+T13,Bizou Ball CJ (Clark 1&2),,2,1,1,,,,1,1
+T13,Crosstraining B,,1,,,,1,,1,
+T13,Fish C,,1,1,,,,,1,1
+T13,Kickball MBS (Messer Field),,3,,,1,1,1,1,1
+T13,Lacrosse CJM (Clark 3),,3,1,1,1,,,1,1
+T13,Minnow C,,1,1,,,,,2,1
+T13,Paddle Sports CJ,,2,1,1,,,,2,
+T13,Pollywog/Guppy CJMBS,,5,1,1,1,1,1,2,
+T13,Ropes JM,,2,,1,1,,,1,1
+T13,Sailing BS,,2,,,,1,1,2,2
+T13,Nature JM,,2,,1,1,,,1,1
+T13,Tower M,,1,,,1,,,2,
+T13,Waterskiing C,,1,1,,,,,1,1
+T13,Woodworking BS,,2,,,,1,1,1,
+T13,Studio Art S ,,1,,,,,1,1,
+T13,RIflery J,,,,1,,,,2,
+H11,12 & 16 Swim Team,,5,1,1,1,1,1,2,
+H11,Archery S,,1,,,,,1,2,
+H11,Arts MBS,,3,,,1,1,1,1,1
+H11,Basketball BS (Pavilion) ,,2,,,,1,1,1,1
+H11,FF/S CJMBS,,5,1,1,1,1,1,2,2
+H11,Kickball CJ (Cadet Field),,2,1,1,,,,2,1
+H11,Nature CJ,,2,1,1,,,,1,1
+H11,Paddle Sports MBS,,3,,,1,1,1,2,1
+H11,Pickleball MBS (Sr. Courts),,3,,,1,1,1,1,2
+H11,Riflery B,,1,,,,1,,2,
+H11,Sailing CJ,,2,1,1,,,,3,2
+H11,Street Hockey MBS (Sr. Courts),,3,,,1,1,1,1,1
+H11,Tennis Baseball CJM (Messer),,3,1,1,1,,,2,2
+H11,Tower S,,1,,,,,1,2,
+H11,Volleyball CJM (Cadet Beach) ,,3,1,1,1,,,2,1
+H11,Waterskiing B,,1,,,,1,,2,
+H11,Woodworking CJM,,3,1,1,1,,,1,1
+H11,Basketball CJ (Jr. Courts),,2,1,1,,,,1,
+H12,12 Archery,,3,1,1,1,,,2,
+H12,12 Basketball (Pavilion),,3,1,1,1,,,2,
+H12,16 Volleyball (Cadet Beach),,3,,,1,1,1,2,
+H12,Crafts MBS,,3,,,1,1,1,1,2
+H12,Baseball MBS (Clark 4),,3,,,1,1,1,1,1
+H12,Crosstraining S,,1,,,,,1,1,
+H12,Fish JMBS,,4,,1,1,1,1,2,2
+H12,Football BS (Messer),,2,,,,1,1,1,1
+H12,Ultimate CJM (Clark 3),,3,1,1,1,,,1,2
+H12,Minnow JMBS,,4,,1,1,1,1,2,2
+H12,Paddle Sports CJ,,2,1,1,,,,2,1
+H12,Riflery C,,1,1,,,,,2,
+H12,Ropes MB,,2,,,1,1,,1,1
+H12,Sailing MBS,,3,,,1,1,1,2,2
+H12,Soccer CJ (Clark 1&2),,2,1,1,,,,2,1
+H12,Studio Art CJ,,2,1,1,,,,1,
+H12,Tennis CJ (Jr. Courts),,2,1,1,,,,1,1
+H12,Tower B,,1,,,,1,,2,
+H12,Waterskiing S,,1,,,,,1,2,
+H13,Baseball CJ (Messer),,2,1,1,,,,1,
+H13,12 Riflery,,3,1,1,1,,,2,
+H13,16 Baseball (Clark 4),,3,,,1,1,1,2,
+H13,Archery B,,1,,,,1,,2,
+H13,Arts CJ,,2,1,1,,,,1,1
+H13,Crosstraining B,,1,,,,1,,1,
+H13,Fish C,,1,1,,,,,1,1
+H13,Angleball MBS (Clark 3) ,,3,,,1,1,1,1,2
+H13,Minnow C,,1,1,,,,,2,1
+H13,Nature BS,,2,,,,1,1,1,1
+H13,Pollywog/Guppy CJMBS,,5,1,1,1,1,1,2,1
+H13,Ropes CJ,,2,1,1,,,,1,1
+H13,Sailing MBS,,3,,,1,1,1,3,2
+H13,Soccer MBS (Clark 1&2),,3,,,1,1,1,1,1
+H13,Street Hockey CJ (Jr. Courts),,2,1,1,,,,1,1
+H13,Pickleball CJM (Besserer Court),,3,1,1,1,,,1,2
+H13,Tower J,,1,,1,,,,2,
+H13,Volleyball BS (Sr. Court),,2,,,,1,1,1,1
+H13,Waterskiing M,,1,,,1,,,2,
+H13,Woodworking JM,,2,,1,1,,,1,1
+H13,Studio Art S,,1,,,,,1,1,
+F11,12 & 16 Swim Team,,5,1,1,1,1,1,2,
+F11,12 Soccer (Clark 1&2),,3,1,1,1,,,2,
+F11,Archery J,,1,,1,,,,2,
+F11,FF/S CJMBS,,5,1,1,1,1,1,2,1
+F11,Kickball CJ (Cadet Field),,2,1,1,,,,1,1
+F11,Ropes MBS,,3,,,1,1,1,1,1
+F11,Riflery C,,1,1,,,,,2,
+F11,Paddlesports BS,,2,,,,1,1,2,1
+F11,Sailing CJM,,3,1,1,1,,,2,3
+F11,Softball MBS (Messer Field),,3,,,1,1,1,2,
+F11,Street Hockey CJ (Jr. Courts),,2,1,1,,,,1,1
+F11,Tennis CJ (Besserer Courts),,2,1,1,,,,1,1
+F11,Tower C,,1,1,,,,,2,
+F11,Ultimate MBS (Clark 4),,3,,,1,1,1,1,1
+F11,Volleyball MBS (Cadet Beach),,3,,,1,1,1,1,1
+F11,Waterskiing M,,1,,,1,,,1,
+F11,Woodworking BS,,2,,,,1,1,1,1
+F11,Nature BS ,,2,,,,1,1,1,1
+F12,12 Basketball (Pavilion),,3,1,1,1,,,2,
+F12,16 Soccer (Clark 1&2),,3,,,1,1,1,2,
+F12,Angleball MBS (Clark 3),,3,,,1,1,1,2,1
+F12,Archery S,,1,,,,,1,2,
+F12,Arts C,,1,1,,,,,1,
+F12,Crafts CJM,,3,1,1,1,,,1,1
+F12,Fish JMBS,,4,,1,1,1,1,2,1
+F12,Football CJ (Messer),,2,1,1,,,,1,1
+F12,Minnow JMBS,,4,,1,1,1,1,2,2
+F12,Pickleball CJ (Besserer Courts),,2,1,1,,,,1,1
+F12,Pickleball MBS (Sr. Courts),,3,,,1,1,1,1,1
+F12,Riflery M,,1,,,1,,,2,
+F12,Ropes CJ,,2,1,1,,,,1,1
+F12,Sailing CJ,,2,1,1,,,,1,2
+F12,Street Hockey BS (Sr. Courts),,2,,,,1,1,1,1
+F12,Studio Art MBS,,3,,,1,1,1,1,
+F12,Tower S,,1,,,,,1,1,
+F12,Volleyball CJ (Cadet Beach),,2,1,1,,,,1,1
+F12,Waterskiing B,,1,,,,1,,1,
+F12,Baseball MB (Clark 4),,2,,,1,1,,1,
+F13,16 Tennis (Senior Courts),,3,,,1,1,1,2,
+F13,Arts JMB,,3,,1,1,1,,2,
+F13,Baseball CJ (Clark 4),,2,1,1,,,,1,1
+F13,Basketball CJ (Jr. Courts),,2,1,1,,,,1,1
+F13,Basketball MBS (Pavilion),,3,,,1,1,1,1,1
+F13,Clark Field Special MBS (Clark 1&2),,3,,,1,1,1,2,2
+F13,Crosstraining S,,1,,,,,1,1,
+F13,Fish C,,1,1,,,,,1,2
+F13,Football BS (Messer),,2,,,,1,1,1,1
+F13,Minnow C,,1,1,,,,,2,1
+F13,Crafts BS,,2,,,,1,1,1,1
+F13,Lacrosse CJM (Clark 3),,3,1,1,1,,,1,1
+F13,Pollywog/Guppy CJMBS,,5,1,1,1,1,1,2,
+F13,Riflery S,,1,,,,,1,2,
+F13,Sailing MBS,,3,,,1,1,1,2,2
+F13,Street Hockey JM (Jr. Courts),,2,,1,1,,,1,
+F13,Tower J,,1,,1,,,,2,
+F13,Waterskiing C,,1,1,,,,,1,1
+F13,Woodworking CJ,,2,1,1,,,,1,1
+F13,Archery M ,,1,,,1,,,2,
+F13,Nature CJM,,3,1,1,1,,,1,1
+S11,12 Soccer (Clark 1&2),,3,1,1,1,,,2,
+S11,12 Tennis (Sr. Courts),,3,1,1,1,,,2,
+S11,16 Baseball (Clark 4),,3,,,1,1,1,2,
+S11,16 Basketball (Pavilion),,3,,,1,1,1,2,
+S11,Archery C,,1,1,,,,,2,
+S11,Crafts BS,,2,,,,1,1,2,
+S11,FF/S CJMBS,,5,1,1,1,1,1,2,1
+S11,Fish JMBS,,4,,1,1,1,1,2,2
+S11,Football CJM (Messer),,3,1,1,1,,,2,1
+S11,Lacrosse CJ (Clark 3),,2,1,1,,,,1,1
+S11,Nature CJM ,,3,1,1,1,,,2,1
+S11,Paddle Sports BS,,2,,,,1,1,2,1
+S11,Riflery M,,1,,,1,,,2,
+S11,Sailing CJ,,2,1,1,,,,3,2
+S11,Tennis MBS (Besserer Court),,3,,,1,1,1,2,1
+S11,Tower B,,1,,,,1,,2,
+S11,Volleyball BS (Cadet Beach),,2,,,,1,1,2,1
+S11,Waterskiing S,,1,,,,,1,2,
+S11,Woodworking CJM,,3,1,1,1,,,2,1
+T21,12 Soccer (Clark 1&2),,3,1,1,1,,,2,
+T21,16 Riflery,,3,,,1,1,1,2,
+T21,Archery C,,1,1,,,,,2,
+T21,Arts CJM,,3,1,1,1,,,1,1
+T21,Street Hockey MBS (Sr. Court),,3,,,1,1,1,1,
+T21,Fish JMBS,,4,,1,1,1,1,2,
+T21,Kickball C (Cadet Field),,1,1,,,,,1,1
+T21,Lacrosse CJ (Clark 3),,2,1,1,,,,1,1
+T21,Minnow JMBS,,4,,1,1,1,1,2,1
+T21,Ropes BS,,2,,,,1,1,2,1
+T21,Sailing CJ,,2,1,1,,,,2,2
+T21,Street Hockey CJ (Jr. Courts),,2,1,1,,,,1,1
+T21,Tennis Baseball CJ (Messer Field),,2,1,1,,,,1,1
+T21,Pickleball MB (Sr. Courts),,2,,,1,1,,1,1
+T21,Tower C,,1,1,,,,,2,
+T21,Ultimate MBS (Clark 4),,3,,,1,1,1,1,1
+T21,Volleyball BS (Cadet Beach),,2,,,,1,1,2,
+T21,Waterskiing J,,1,,1,,,,2,1
+T21,Woodworking MBS,,3,,,1,1,1,1,
+T22,12 Baseball (Messer Field),,3,1,1,1,,,2,
+T22,16 Soccer (Clark 1&2),,3,,,1,1,1,2,
+T22,Archery J,,1,,1,,,,2,
+T22,Basketball C (Jr. Courts),,1,1,,,,,1,
+T22,Crosstraining S,,1,,,,,1,1,
+T22,FF/S CJMBS,,5,1,1,1,1,1,2,1
+T22,Minnow JMBS,,4,,1,1,1,1,2,2
+T22,Nature BS,,2,,,,1,1,1,1
+T22,Riflery B,,1,,,,1,,2,
+T22,Ropes CJM,,3,1,1,1,,,1,1
+T22,Sailing BS,,2,,,,1,1,2,3
+T22,Basketball MBS (Pavilion),,3,,,1,1,1,1,1
+T22,Ultimate CJ (Clark 3),,2,1,1,,,,1,1
+T22,Crafts CJM,,3,1,1,1,,,2,
+T22,Tennis MBS (Sr. Courts),,3,,,1,1,1,1,1
+T22,Tower S,,1,,,,,1,2,
+T22,Volleyball CJM (Cadet Beach) ,,3,1,1,1,,,1,1
+T22,Waterskiing B,,1,,,,1,,2,
+T22,Woodworking CJM,,3,1,1,1,,,1,1
+T23,16 Archery,,3,,,1,1,1,2,
+T23,16 Tennis (Sr. Court),,3,,,1,1,1,2,
+T23,Arts MBS,,3,,,1,1,1,1,1
+T23,Baseball BS (Clark 4),,2,,,,1,1,1,1
+T23,Basketball JM (Pavilion),,2,,1,1,,,1,1
+T23,Bizouball CJ (Clark 1&2),,2,1,1,,,,2,1
+T23,Nature CJ,,2,1,1,,,,1,1
+T23,Crosstraining B,,1,,,,1,,1,
+T23,Fish C,,1,1,,,,,1,1
+T23,Kickball MBS (Messer Field),,2,,,,1,1,2,1
+T23,Lacrosse MBS (Clark 3),,3,,,1,1,1,1,1
+T23,Minnow C,,1,1,,,,,2,1
+T23,Paddle Sports MBS,,3,,,1,1,1,2,
+T23,Pollywog/Guppy CJMBS,,5,1,1,1,1,1,2,
+T23,Riflery J,,1,,1,,,,2,
+T23,Sailing CJM,,3,1,1,1,,,3,2
+T23,Studio Art CJM ,,3,1,1,1,,,1,
+T23,Tennis CJM (Besserer Courts),,3,1,1,1,,,1,1
+T23,Tower M,,1,,,1,,,2,
+T23,Waterskiing C,,1,1,,,,,2,1
+H21,12 & 16 Swim Team,,5,1,1,1,1,1,2,
+H21,12 Riflery,,3,1,1,1,,,2,
+H21,16 Basketball (Pavilion),,2,,,,1,1,2,
+H21,Archery B,,1,,,,1,,2,
+H21,Arts CJ,,2,1,1,,,,1,2
+H21,FF/S CJMBS,,5,1,1,1,1,1,1,2
+H21,Kickball C (Cadet Field),,1,1,,,,,1,1
+H21,Paddle Sports CJM,,3,1,1,1,,,2,1
+H21,Ropes MBS,,3,,,1,1,1,2,1
+H21,Sailing BS,,2,,,,1,1,2,3
+H21,Softball MBS (Messer Field) ,,3,,,1,1,1,2,1
+H21,Street Hockey BS (Senior Courts),,2,,,,1,1,1,1
+H21,Street Hockey CJM (Jr. Courts),,3,1,1,1,,,1,1
+H21,Tennis MBS (Besserer Courts),,3,,,1,1,1,2,1
+H21,Tower J,,1,,1,,,,2,
+H21,Volleyball CJ (Cadet Beach),,2,1,1,,,,1,1
+H21,Waterskiing S,,1,,,,,1,2,
+H21,Woodworking CJM,,3,1,1,1,,,1,1
+H21,Crosstraining,,,,,,,1,1,
+H22,12 Basketball (Pavilion),,3,1,1,1,,,2,
+H22,16 Volleyball (Cadet Beach),,3,,,1,1,1,2,
+H22,Archery S,,1,,,,,1,2,
+H22,Ultimate C (Clark 4),,1,1,,,,,1,1
+H22,Pickleball BS (Sr. Courts),,2,,,,1,1,1,
+H22,Crafts BS,,2,,,,1,1,1,1
+H22,Fish JMBS,,4,,1,1,1,1,2,2
+H22,Football MBS (Messer),,3,,,1,1,1,1,1
+H22,Lacrosse CJM (Clark 3),,3,1,1,1,,,1,
+H22,Minnow JMBS,,4,,1,1,1,1,2,2
+H22,Nature CJM ,,3,1,1,1,,,1,2
+H22,Paddle Sports BS,,2,,,,1,1,2,1
+H22,Riflery M,,1,,,1,,,2,
+H22,Ropes CJ,,2,1,1,,,,1,1
+H22,Sailing CJ,,2,1,1,,,,2,2
+H22,Soccer MBS (Clark 1&2),,3,,,1,1,1,1,2
+H22,Studio Art CJ,,2,1,1,,,,1,
+H22,Tennis CJ (Besserer Courts),,2,1,1,,,,1,1
+H22,Tower B,,1,,,,1,,2,
+H22,Waterskiing M,,1,,,1,,,2,
+H23,12 Archery,,3,1,1,1,,,2,
+H23,12 Tennis (Sr. Court),,3,1,1,1,,,2,
+H23,16 Baseball (Clark 4),,3,,,1,1,1,2,
+H23,Arts MBS,,3,,,1,1,1,1,1
+H23,Baseball CJM (Messer),,3,1,1,1,,,1,1
+H23,Basketball JM (Pavilion),,2,,1,1,,,1,1
+H23,Crafts CJ,,2,1,1,,,,1,2
+H23,Fish C,,1,1,,,,,1,1
+H23,Lacrosse BS (Clark 3),,2,,,,1,1,1,1
+H23,Minnow C,,1,1,,,,,2,1
+H23,Volleyball MBS (Sr. Court),,3,,,1,1,1,1,1
+H23,Pollywog/Guppy CJMBS,,5,1,1,1,1,1,2,
+H23,Riflery C,,1,1,,,,,2,
+H23,Ropes S,,1,,,,,1,1,1
+H23,Sailing MBS ,,3,,,1,1,1,3,2
+H23,Nature BS,,2,,,,1,1,1,1
+H23,Soccer CJ (Clark 1&2),,2,1,1,,,,1,1
+H23,Tower M,,1,,,1,,,2,
+H23,Waterskiing J,,1,,1,,,,2,1
+H23,Woodworking BS,,2,,,,1,1,1,1
+F21,Archery J,,1,,1,,,,2,
+F21,Basketball CJ (Jr. Courts),,2,1,1,,,,1,1
+F21,Clark Field Special MBS (Clark 1 & 2),,3,,,1,1,1,2,1
+F21,Crafts CJM,,3,1,1,1,,,1,1
+F21,FF/S CJMBS,,5,1,1,1,1,1,2,
+F21,Fish CJM,,3,1,1,1,,,1,1
+F21,Football MBS (Messer),,3,,,1,1,1,1,1
+F21,Ultimate CJ (Clark 3),,2,1,1,,,,1,1
+F21,Paddle Sports MBS,,3,,,1,1,1,2,1
+F21,Pickleball MBS (Sr. Court),,3,,,1,1,1,1,1
+F21,Riflery B,,1,,,,1,,2,
+F21,Sailing CJM,,3,1,1,1,,,3,2
+F21,Street Hockey BS (Sr. Courts),,2,,,,1,1,1,1
+F21,Tennis CJ (Besserer Courts),,2,1,1,,,,1,1
+F21,Tower S,,1,,,,,1,2,
+F21,Waterskiing C,,1,1,,,,,1,1
+F21,Woodworking BS,,2,,,,1,1,1,
+F21,Nature BS,,2,,,,1,1,1,
+F21,Studio Art CJ,,2,1,1,,,,1,
+F22,Archery M,,1,,,1,,,2,
+F22,Basketball MBS (Pavilion) ,,3,,,1,1,1,1,1
+F22,Bizou CJ (Clark 1&2),,2,1,1,,,,2,1
+F22,Crosstraining B,,1,,,,1,,1,
+F22,Fish JMBS,,4,,1,1,1,1,2,1
+F22,Kickball CJ (Cadet Field) ,,2,1,1,,,,1,1
+F22,Minnow C,,1,1,,,,,1,1
+F22,Nature CJ,,2,1,1,,,,1,1
+F22,Paddle Sports CJM,,3,1,1,1,,,2,1
+F22,Riflery J,,1,,1,,,,2,
+F22,Sailing BS,,2,,,,1,1,2,2
+F22,Angleball MBS (Clark 3),,3,,,1,1,1,1,1
+F22,Studio Art MBS,,3,,,1,1,1,1,
+F22,12 Baseball (Messer),,3,1,1,1,,,2,
+F22,Tennis MBS (Senior Courts),,3,,,1,1,1,1,1
+F22,Tower C,,1,1,,,,,2,
+F22,Volleyball MBS (Cadet Beach) ,,3,,,1,1,1,1,1
+F22,Waterskiing S,,1,,,,,1,1,
+F22,Pickleball CJ (Besserer Courts),,2,1,1,,,,1,1

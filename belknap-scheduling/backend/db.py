@@ -33,12 +33,36 @@ cursor = conn.cursor()
 # sq3 = """insert into users values(0, 'xyz@gmail.com','XYZ123abc')"""
 
 
-sql_query = """ CREATE TABLE lg_sched (
+# sql_query = """ CREATE TABLE lg_sched (
+#     id INTEGER PRIMARY KEY AUTOINCREMENT,
+#     timeslot text NOT NULL,
+#     guardId INTEGER references users (id),
+#     certified BOOL references users (lifeguard)
+# )"""
+
+# cursor.execute(sql_query)
+
+sql_query = """ CREATE TABLE master_schedule (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     timeslot text NOT NULL,
-    guardId INTEGER references users (id),
-    certified BOOL references users (lifeguard)
-)"""
+    period_name text NOT NULL,
+    location text NOT NULL,
+    for_c BOOL,
+    for_j BOOL,
+    for_m BOOL,
+    for_b BOOL,
+    for_s BOOL,
+    req_lifeguard BOOL,
+    req_ropes BOOL,
+    req_boat BOOL,
+    req_lund BOOL,
+    req_eddie BOOL,
+    req_bill BOOL,
+    req_nymcah BOOL,
+    req_wfa BOOL,
+    num_leaders INTEGER NOT NULL,
+    leaders text
+    )"""
 
 cursor.execute(sql_query)
 

@@ -9,6 +9,7 @@ import Register from './pages/Register';
 import AdminLanding from './pages/AdminLanding';
 import ProfileModificaton from './pages/ProfileModification';
 import LifeguardSchedule from './pages/LifeguardSchedule';
+import LeaderSchedule from './pages/LeaderSchedule';
 
 
 const Router = () => {
@@ -21,6 +22,7 @@ const Router = () => {
             <Route path="/admin" element={<AdminLanding />} />
             <Route path="/profile/modify/" element={<ProfileModificaton />} />
             <Route path="/lifeguardSchedule" element={<LifeguardSchedule />} />
+            <Route path="/leaderSchedule" element={<LeaderSchedule />} />
         </Routes>
     );
 }

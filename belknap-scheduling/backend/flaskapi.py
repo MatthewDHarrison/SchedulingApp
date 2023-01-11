@@ -197,5 +197,17 @@ def getLifeguardSchedule():
     sched = cursor.fetchall()
 
     return jsonify(sched), 200
+
+@app.route('/masterSchedule', methods=['GET'])
+def getMasterSchedule():
+    conn = db_connection()
+    cursor = conn.cursor()
+
+    sql_query = """ SELECT master_schedule.timeslot, master_schedule.period_name, master_schedule.location FROM master_schedule """
+    cursor.execute(sql_query)
+
+    sched = cursor.fetchall()
+
+    return jsonify(sched), 200
 if __name__ == "__main__":
     app.run(debug=True)
