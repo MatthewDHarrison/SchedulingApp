@@ -2,10 +2,20 @@ import * as React from 'react';
 import { ApiCall } from "../components/ApiCall";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
-import Container from '@mui/material/Container';
+// import Container from '@mui/material/Container';
 import { Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import { Stack } from '@mui/material';
+import ReactDOM from "react-dom";
+import { Container, Draggable } from "react-smooth-dnd";
+import {arrayMoveMutable} from "array-move";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
+import DragHandleIcon from "@mui/icons-material/DragHandle";
+
 
 const days = ['Tuesday', 'Thursday', 'Friday', 'Saturday', 'Tuesday', 'Thursday', 'Friday'];
 const keys = ['T11', 'H11', 'F11', 'S11', 'T21', 'H21', 'F21', 
@@ -19,6 +29,15 @@ export default function LeaderSchedule() {
     const [sched, setSched] = React.useState(Object.fromEntries(keys.map(k => [k, {periods: []}])));
     const [loaded, setLoaded] = React.useState(false);
     const dataFetchedRef = React.useRef(false);
+
+    const onDrop = ({removedIndex, addedIndex, payload}) => {
+        console.log(payload.key);
+        let temp = {...sched};
+        arrayMoveMutable(temp[payload.key].periods, removedIndex, addedIndex);
+        setSched(temp);
+    };
+
+
 
     React.useEffect(() => {
         if (dataFetchedRef.current) return;
@@ -77,42 +96,69 @@ export default function LeaderSchedule() {
 
                         <Grid item xs={1}>First Period</Grid>
 
-                        {keys.slice(0,7).map((key, index) => (<Grid item xs={1} minHeight={400} sx={sched[key].periods.length > 0 ? {} : {bgcolor: '#555'}}>
-                            <Stack>
-                                {sched[key].periods.slice(0, -1).map((name, i) => (
-                                    <Typography sx={{fontWeight: 'bold'}}key={i}>
-                                        {name}
-                                    </Typography>
-                                ))}
-                                
-                            </Stack>
+                        {keys.slice(0,7).map((key, index) => (<Grid item key={key} xs={1} minHeight={400} sx={sched[key].periods.length > 0 ? {} : {bgcolor: '#555'}}>
+                            <List>
+                                <Container dragHandleSelector=".drag-handle" lockAxis="y" onDrop={onDrop}
+                                            getChildPayload={(ind) => {return {key}}}>
+                                    {sched[key].periods.map((name, i) => (
+                                        <Draggable key={i}>
+                                            <ListItem>
+                                                <ListItemText primary={name} />
+                                                <ListItemSecondaryAction>
+                                                    <ListItemIcon className="drag-handle">
+                                                    <DragHandleIcon />
+                                                    </ListItemIcon>
+                                                </ListItemSecondaryAction>
+                                            </ListItem>
+                                        </Draggable>
+                                    ))}
+                                </Container>
+                            </List>
                         </Grid>))}
         
                         
                         <Grid item xs={1}>Second Period</Grid>
 
-                        {keys.slice(7,14).map((key, index) => (<Grid item xs={1} minHeight={400} sx={sched[key].periods.length > 0 ? {} : {bgcolor: '#555'}}>
-                            <Stack>
-                                {sched[key].periods.slice(0, -1).map((name, i) => (
-                                    <Typography sx={{fontWeight: 'bold'}}key={i}>
-                                        {name}
-                                    </Typography>
-                                ))}
-                                
-                            </Stack>
+                        {keys.slice(7,14).map((key, index) => (<Grid item key={key} xs={1} minHeight={400} sx={sched[key].periods.length > 0 ? {} : {bgcolor: '#555'}}>
+                            <List>
+                                <Container dragHandleSelector=".drag-handle" lockAxis="y" onDrop={onDrop}
+                                            getChildPayload={(ind) => {return {key}}}>
+                                    {sched[key].periods.map((name, i) => (
+                                        <Draggable key={i}>
+                                            <ListItem>
+                                                <ListItemText primary={name} />
+                                                <ListItemSecondaryAction>
+                                                    <ListItemIcon className="drag-handle">
+                                                    <DragHandleIcon />
+                                                    </ListItemIcon>
+                                                </ListItemSecondaryAction>
+                                            </ListItem>
+                                        </Draggable>
+                                    ))}
+                                </Container>
+                            </List>
                         </Grid>))}
 
                         <Grid item xs={1}>Third Period</Grid>
 
-                        {keys.slice(14,21).map((key, index) => (<Grid item xs={1} minHeight={400} sx={sched[key].periods.length > 0 ? {} : {bgcolor: '#555'}}>
-                            <Stack>
-                                {sched[key].periods.slice(0, -1).map((name, i) => (
-                                    <Typography sx={{fontWeight: 'bold'}}key={i}>
-                                        {name}
-                                    </Typography>
-                                ))}
-                                
-                            </Stack>
+                        {keys.slice(14,21).map((key, index) => (<Grid item key={key} xs={1} minHeight={400} sx={sched[key].periods.length > 0 ? {} : {bgcolor: '#555'}}>
+                            <List>
+                                <Container dragHandleSelector=".drag-handle" lockAxis="y" onDrop={onDrop}
+                                            getChildPayload={(ind) => {return {key}}}>
+                                    {sched[key].periods.map((name, i) => (
+                                        <Draggable key={i}>
+                                            <ListItem>
+                                                <ListItemText primary={name} />
+                                                <ListItemSecondaryAction>
+                                                    <ListItemIcon className="drag-handle">
+                                                    <DragHandleIcon />
+                                                    </ListItemIcon>
+                                                </ListItemSecondaryAction>
+                                            </ListItem>
+                                        </Draggable>
+                                    ))}
+                                </Container>
+                            </List>
                         </Grid>))}
                     </Grid>
                     <Button variant="contained" sx={{mt: 5}} onClick={() => {wk === 2 ? setWk(1) : setWk(2)}}>
