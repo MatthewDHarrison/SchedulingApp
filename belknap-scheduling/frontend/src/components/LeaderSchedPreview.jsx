@@ -1,14 +1,6 @@
 import * as React from 'react';
-import { ApiCall } from "../components/ApiCall";
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
-// import Container from '@mui/material/Container';
 import { Typography } from '@mui/material';
-import Button from '@mui/material/Button';
-import { Stack } from '@mui/material';
-import ReactDOM from "react-dom";
-import { Container, Draggable } from "react-smooth-dnd";
-import {arrayMoveMutable} from "array-move";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -32,7 +24,7 @@ const LeaderSchedPreviewCell = ({period, keySlice, sched}) => {
             <Grid item key={index} xs={1} minHeight={400} sx={sched[key].periods.length > 0 ? {} : {bgcolor: '#555'}}>
                 <List sx={{listStyleType: 'decimal', pl: 4}} >
                     {sched[key].periods.slice(0,5).map((name, i) => (
-                        <ListItem sx={{ display: 'list-item', fontWeight: 'bold'}}>
+                        <ListItem key={i} sx={{ display: 'list-item', fontWeight: 'bold'}}>
                             <ListItemText primary={name} />
                         </ListItem>
                     ))}
@@ -74,7 +66,7 @@ export default function LeaderSchedPreview({sched, setSched, page, setPage}) {
                 ))}
 
                 {[...Array(3)].map((_, ind) => {
-                    return <LeaderSchedPreviewCell period={periods[ind]} 
+                    return <LeaderSchedPreviewCell key={ind} period={periods[ind]} 
                                             keySlice={keys.slice(ind * 7, ind * 7 + 7)}
                                             sched={sched} />
                 })}

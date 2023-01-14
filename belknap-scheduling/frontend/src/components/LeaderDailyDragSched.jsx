@@ -1,12 +1,6 @@
 import * as React from 'react';
-import { ApiCall } from "../components/ApiCall";
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
-// import Container from '@mui/material/Container';
 import { Typography } from '@mui/material';
-import Button from '@mui/material/Button';
-import { Stack } from '@mui/material';
-import ReactDOM from "react-dom";
 import { Container, Draggable } from "react-smooth-dnd";
 import {arrayMoveMutable} from "array-move";
 import List from "@mui/material/List";
@@ -18,9 +12,7 @@ import DragHandleIcon from "@mui/icons-material/DragHandle";
 
 
 const days = ['Tuesday', 'Thursday', 'Friday', 'Saturday', 'Tuesday', 'Thursday', 'Friday'];
-// const keys = ['T11', 'H11', 'F11', 'S11', 'T21', 'H21', 'F21', 
-//               'T12', 'H12', 'F12', 'S12', 'T22', 'H22', 'F22',
-//               'T13', 'H13', 'F13', 'S13', 'T23', 'H23', 'F23']
+
 const keys = ['T11', 'T12', 'T13', 'H11', 'H12', 'H13', 'F11', 'F12', 'F13', 'S11', 'S12', 'S13',
               'T21', 'T22', 'T23', 'H21', 'H22', 'H23', 'F21', 'F22', 'F23'];
 const periods = ['First Period', 'Second Period', 'Third Period']
@@ -28,10 +20,8 @@ const periods = ['First Period', 'Second Period', 'Third Period']
 
 
 export default function LeaderDailyDragSched({sched, setSched, page}) {
-    console.log(sched);
 
     const onDrop = ({removedIndex, addedIndex, payload}) => {
-        console.log(payload.key);
         let temp = {...sched};
         arrayMoveMutable(temp[payload.key].periods, removedIndex, addedIndex);
         setSched(temp);

@@ -1,20 +1,9 @@
 import * as React from 'react';
 import { ApiCall } from "../components/ApiCall";
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Unstable_Grid2';
-// import Container from '@mui/material/Container';
-import { Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import { Stack } from '@mui/material';
-import ReactDOM from "react-dom";
 import { Container, Draggable } from "react-smooth-dnd";
-import {arrayMoveMutable} from "array-move";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
-import DragHandleIcon from "@mui/icons-material/DragHandle";
 import LeaderDailyDragSched from '../components/LeaderDailyDragSched';
 import LeaderSchedPreview from '../components/LeaderSchedPreview';
 
@@ -22,7 +11,6 @@ const days = ['Tuesday', 'Thursday', 'Friday', 'Saturday', 'Tuesday', 'Thursday'
 
 const keys = ['T11', 'T12', 'T13', 'H11', 'H12', 'H13', 'F11', 'F12', 'F13', 'S11', 'S12', 'S13',
               'T21', 'T22', 'T23', 'H21', 'H22', 'H23', 'F21', 'F22', 'F23'];
-const periods = ['First Period', 'Second Period', 'Third Period']
              
 
 
@@ -43,12 +31,10 @@ export default function LeaderSchedule() {
             if (!loaded) {
                 for (let i = 0; i < data.length; i++) {
                     let temp = sched;
-                    console.log(data);
                     temp[data[i][0]].periods.push(data[i][1])
                     setSched(temp)
                 }
             }    
-            console.log(sched);
             setLoaded(true);
         })
     }, [])

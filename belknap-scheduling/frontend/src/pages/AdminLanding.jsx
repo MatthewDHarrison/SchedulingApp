@@ -27,9 +27,6 @@ function AdminLanding() {
         
     }
 
-    const onFileChange = (e) => {
-        setUFile(e.target.files[0])
-    }
     return (
         <>
             <Container component="main" maxWidth="md" sx={{ mt: 3 }}>
