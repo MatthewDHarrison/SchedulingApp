@@ -15,29 +15,22 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 import DragHandleIcon from "@mui/icons-material/DragHandle";
-
+import LeaderDailyDragSched from '../components/LeaderDailyDragSched';
+import LeaderSchedPreview from '../components/LeaderSchedPreview';
 
 const days = ['Tuesday', 'Thursday', 'Friday', 'Saturday', 'Tuesday', 'Thursday', 'Friday'];
-const keys = ['T11', 'H11', 'F11', 'S11', 'T21', 'H21', 'F21', 
-              'T12', 'H12', 'F12', 'S12', 'T22', 'H22', 'F22',
-              'T13', 'H13', 'F13', 'S13', 'T23', 'H23', 'F23']
+
+const keys = ['T11', 'T12', 'T13', 'H11', 'H12', 'H13', 'F11', 'F12', 'F13', 'S11', 'S12', 'S13',
+              'T21', 'T22', 'T23', 'H21', 'H22', 'H23', 'F21', 'F22', 'F23'];
+const periods = ['First Period', 'Second Period', 'Third Period']
              
 
 
 export default function LeaderSchedule() {
-    const [wk, setWk] = React.useState(1);
     const [sched, setSched] = React.useState(Object.fromEntries(keys.map(k => [k, {periods: []}])));
     const [loaded, setLoaded] = React.useState(false);
+    const [page, setPage] = React.useState(0);
     const dataFetchedRef = React.useRef(false);
-
-    const onDrop = ({removedIndex, addedIndex, payload}) => {
-        console.log(payload.key);
-        let temp = {...sched};
-        arrayMoveMutable(temp[payload.key].periods, removedIndex, addedIndex);
-        setSched(temp);
-    };
-
-
 
     React.useEffect(() => {
         if (dataFetchedRef.current) return;
@@ -64,107 +57,23 @@ export default function LeaderSchedule() {
         return (
             <Container component="main" maxWidth="xl">
                 <Box sx={{ flexGrow: 1, p: 2, mt: 10, mb: 20}}
-                        padding="40px"
-                        borderRadius="10px"
-                        backgroundColor="#ddd">
-                    <Typography align="center" variant="h2">Lifeguarding Schedule Week {wk}</Typography>
-                    <Grid
-                        container
-                        spacing={2}
-                        columns={8}
-                        sx={{
-                        mt: 3,
-                        '--Grid-borderWidth': '1px',
-                        borderTop: 'var(--Grid-borderWidth) solid',
-                        borderLeft: 'var(--Grid-borderWidth) solid',
-                        borderColor: 'divider',
-                        '& > div': {
-                            borderRight: 'var(--Grid-borderWidth) solid',
-                            borderBottom: 'var(--Grid-borderWidth) solid',
-                            borderColor: 'divider',
-                        },
-                        }}
-                    >   
-                        <Grid item xs={1}></Grid>
-                        {[...Array(7)].map((_, index) => (
-                        <Grid align-items="center" item key={index} xs={1} minHeight={10}>
-                            <Typography variant="h7" align="center">
-                                {days[index]}
-                            </Typography>
-                        </Grid>
+                    padding="40px"
+                    borderRadius="10px"
+                    backgroundColor="#ddd">
+                    {page === 7 ? <LeaderSchedPreview sched={sched} setSched={setSched} page={page} /> : <LeaderDailyDragSched sched={sched} setSched={setSched} page={page}/>}
+
+                    <Stack direction="row" spacing={2} sx={{mt: 5}}>
+                        {days.map((day, index) => (
+                            <Button key={index} variant="contained" onClick={() => {setPage(index)}}>
+                                {day}
+                            </Button>
                         ))}
-
-                        <Grid item xs={1}>First Period</Grid>
-
-                        {keys.slice(0,7).map((key, index) => (<Grid item key={key} xs={1} minHeight={400} sx={sched[key].periods.length > 0 ? {} : {bgcolor: '#555'}}>
-                            <List>
-                                <Container dragHandleSelector=".drag-handle" lockAxis="y" onDrop={onDrop}
-                                            getChildPayload={(ind) => {return {key}}}>
-                                    {sched[key].periods.map((name, i) => (
-                                        <Draggable key={i}>
-                                            <ListItem>
-                                                <ListItemText primary={name} />
-                                                <ListItemSecondaryAction>
-                                                    <ListItemIcon className="drag-handle">
-                                                    <DragHandleIcon />
-                                                    </ListItemIcon>
-                                                </ListItemSecondaryAction>
-                                            </ListItem>
-                                        </Draggable>
-                                    ))}
-                                </Container>
-                            </List>
-                        </Grid>))}
-        
-                        
-                        <Grid item xs={1}>Second Period</Grid>
-
-                        {keys.slice(7,14).map((key, index) => (<Grid item key={key} xs={1} minHeight={400} sx={sched[key].periods.length > 0 ? {} : {bgcolor: '#555'}}>
-                            <List>
-                                <Container dragHandleSelector=".drag-handle" lockAxis="y" onDrop={onDrop}
-                                            getChildPayload={(ind) => {return {key}}}>
-                                    {sched[key].periods.map((name, i) => (
-                                        <Draggable key={i}>
-                                            <ListItem>
-                                                <ListItemText primary={name} />
-                                                <ListItemSecondaryAction>
-                                                    <ListItemIcon className="drag-handle">
-                                                    <DragHandleIcon />
-                                                    </ListItemIcon>
-                                                </ListItemSecondaryAction>
-                                            </ListItem>
-                                        </Draggable>
-                                    ))}
-                                </Container>
-                            </List>
-                        </Grid>))}
-
-                        <Grid item xs={1}>Third Period</Grid>
-
-                        {keys.slice(14,21).map((key, index) => (<Grid item key={key} xs={1} minHeight={400} sx={sched[key].periods.length > 0 ? {} : {bgcolor: '#555'}}>
-                            <List>
-                                <Container dragHandleSelector=".drag-handle" lockAxis="y" onDrop={onDrop}
-                                            getChildPayload={(ind) => {return {key}}}>
-                                    {sched[key].periods.map((name, i) => (
-                                        <Draggable key={i}>
-                                            <ListItem>
-                                                <ListItemText primary={name} />
-                                                <ListItemSecondaryAction>
-                                                    <ListItemIcon className="drag-handle">
-                                                    <DragHandleIcon />
-                                                    </ListItemIcon>
-                                                </ListItemSecondaryAction>
-                                            </ListItem>
-                                        </Draggable>
-                                    ))}
-                                </Container>
-                            </List>
-                        </Grid>))}
-                    </Grid>
-                    <Button variant="contained" sx={{mt: 5}} onClick={() => {wk === 2 ? setWk(1) : setWk(2)}}>
-                        Show week {wk === 2 ? 1 : 2}
-                    </Button>
+                        <Button variant="contained" onClick={() => {setPage(7)}}>
+                            View Schedule Preview
+                        </Button>
+                    </Stack>
                 </Box>
+                
             </Container>
 
         );
