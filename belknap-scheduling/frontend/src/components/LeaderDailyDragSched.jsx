@@ -36,16 +36,16 @@ export default function LeaderDailyDragSched({sched, setSched, page}) {
                 spacing={2}
                 columns={10}
                 sx={{
-                mt: 3,
-                '--Grid-borderWidth': '1px',
-                borderTop: 'var(--Grid-borderWidth) solid',
-                borderLeft: 'var(--Grid-borderWidth) solid',
-                borderColor: 'divider',
-                '& > div': {
-                    borderRight: 'var(--Grid-borderWidth) solid',
-                    borderBottom: 'var(--Grid-borderWidth) solid',
+                    mt: 3,
+                    '--Grid-borderWidth': '1px',
+                    borderTop: 'var(--Grid-borderWidth) solid',
+                    borderLeft: 'var(--Grid-borderWidth) solid',
                     borderColor: 'divider',
-                },
+                    '& > div': {
+                        borderRight: 'var(--Grid-borderWidth) solid',
+                        borderBottom: 'var(--Grid-borderWidth) solid',
+                        borderColor: 'divider',
+                    },
                 }}
             >   
                 <Grid item xs={1}></Grid>
@@ -59,17 +59,17 @@ export default function LeaderDailyDragSched({sched, setSched, page}) {
 
                 <Grid item xs={1}>{days[page]}</Grid>
 
-                {keys.slice(0 + page * 3,3 + page * 3).map((key, index) => (<Grid item key={key} xs={3} minHeight={400} sx={sched[key].periods.length > 0 ? {} : {bgcolor: '#555'}}>
+                {keys.slice(0 + page * 3,3 + page * 3).map((key, _) => (<Grid item key={key} xs={3} minHeight={400} minWidth={200} sx={sched[key].periods.length > 0 ? {} : {bgcolor: '#555'}}>
                     <List>
                         <Container dragHandleSelector=".drag-handle" lockAxis="y" onDrop={onDrop}
-                                    getChildPayload={(ind) => {return {key}}}>
+                                    getChildPayload={() => {return {key}}}>
                             {sched[key].periods.map((name, i) => (
                                 <Draggable key={i}>
                                     <ListItem sx={{height: 30}} >
                                         <ListItemText primary={name} primaryTypographyProps={{fontSize: '14px'}}/>
                                         <ListItemSecondaryAction>
-                                            <ListItemIcon className="drag-handle">
-                                            <DragHandleIcon />
+                                            <ListItemIcon className="drag-handle" sx={{'&:hover': {cursor: 'pointer'}}}>
+                                                <DragHandleIcon />
                                             </ListItemIcon>
                                         </ListItemSecondaryAction>
                                     </ListItem>

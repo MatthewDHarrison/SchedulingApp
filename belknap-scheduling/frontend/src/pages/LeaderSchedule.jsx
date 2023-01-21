@@ -15,8 +15,7 @@ const keys = ['T11', 'T12', 'T13', 'H11', 'H12', 'H13', 'F11', 'F12', 'F13', 'S1
 
 
 export default function LeaderSchedule() {
-    const [sched, setSched] = React.useState(Object.fromEntries(keys.map(k => [k, {periods: []}])));
-    const [loaded, setLoaded] = React.useState(false);
+    const [sched, setSched] = React.useState({});
     const [page, setPage] = React.useState(0);
     const dataFetchedRef = React.useRef(false);
 
@@ -28,47 +27,38 @@ export default function LeaderSchedule() {
             "GET",
             `masterSchedule`
         ).then((data) => {
-            if (!loaded) {
-                for (let i = 0; i < data.length; i++) {
-                    let temp = sched;
-                    temp[data[i][0]].periods.push(data[i][1])
-                    setSched(temp)
-                }
-            }    
-            setLoaded(true);
+
+            let temp = Object.fromEntries(keys.map(k => [k, {periods: []}]));
+            for (let i = 0; i < data.length; i++) {
+                temp[data[i][0]].periods.push(data[i][1])
+            }
+            setSched(temp)
         })
     }, [])
 
-    if (loaded) {
-        return (
-            <Container component="main" maxWidth="xl">
-                <Grid container justifyContent="center">
-                    <Grid item>
-                        <Box maxWidth="lg" sx={{ flexGrow: 1, p: 2, mt: 10, mb: 20}}
-                            padding="40px"
-                            borderRadius="10px"
-                            backgroundColor="#ddd">
-                            {page === 7 ? <LeaderSchedPreview sched={sched} setSched={setSched} page={page} /> : <LeaderDailyDragSched sched={sched} setSched={setSched} page={page}/>}
+    return (sched['T11'] && 
+        <Container component="main" maxWidth="xl">
+            <Grid container justifyContent="center">
+                <Grid item>
+                    <Box maxWidth="lg" sx={{ flexGrow: 1, p: 2, mt: 10, mb: 20}}
+                        padding="40px"
+                        borderRadius="10px"
+                        backgroundColor="#ddd">
+                        {page === 7 ? <LeaderSchedPreview sched={sched} setSched={setSched} page={page} /> : <LeaderDailyDragSched sched={sched} setSched={setSched} page={page}/>}
 
-                            <Stack direction="row" spacing={2} sx={{mt: 5}}>
-                                {days.map((day, index) => (
-                                    <Button key={index} variant="contained" onClick={() => {setPage(index)}}>
-                                        {day}
-                                    </Button>
-                                ))}
-                                <Button variant="contained" onClick={() => {setPage(7)}}>
-                                    View Schedule Preview
+                        <Stack direction="row" spacing={2} sx={{mt: 5}}>
+                            {days.map((day, index) => (
+                                <Button key={index} variant="contained" onClick={() => {setPage(index)}}>
+                                    {day}
                                 </Button>
-                            </Stack>
-                        </Box>
-                    </Grid>
+                            ))}
+                            <Button variant="contained" onClick={() => {setPage(7)}}>
+                                View Schedule Preview
+                            </Button>
+                        </Stack>
+                    </Box>
                 </Grid>
-                
-                
-            </Container>
-
-        );
-    } else {
-        return <>Loading...</>
-    }
+            </Grid>
+        </Container>
+    );
 }
