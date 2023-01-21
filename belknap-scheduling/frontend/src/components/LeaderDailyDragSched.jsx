@@ -65,8 +65,8 @@ export default function LeaderDailyDragSched({sched, setSched, page}) {
                                     getChildPayload={(ind) => {return {key}}}>
                             {sched[key].periods.map((name, i) => (
                                 <Draggable key={i}>
-                                    <ListItem>
-                                        <ListItemText primary={name} />
+                                    <ListItem sx={{height: 30}} >
+                                        <ListItemText primary={name} primaryTypographyProps={{fontSize: '14px'}}/>
                                         <ListItemSecondaryAction>
                                             <ListItemIcon className="drag-handle">
                                             <DragHandleIcon />

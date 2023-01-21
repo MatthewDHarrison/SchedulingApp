@@ -21,11 +21,11 @@ const LeaderSchedPreviewCell = ({period, keySlice, sched}) => {
         <Grid item xs={1}>{period}</Grid>
 
         {keySlice.map((key, index) => (
-            <Grid item key={index} xs={1} minHeight={400} sx={sched[key].periods.length > 0 ? {} : {bgcolor: '#555'}}>
+            <Grid item key={index} xs={1} minHeight={300} sx={sched[key].periods.length > 0 ? {} : {bgcolor: '#555'}}>
                 <List sx={{listStyleType: 'decimal', pl: 4}} >
                     {sched[key].periods.slice(0,5).map((name, i) => (
-                        <ListItem key={i} sx={{ display: 'list-item', fontWeight: 'bold'}}>
-                            <ListItemText primary={name} />
+                        <ListItem key={i} sx={{ display: 'list-item', pt: 0, fontWeight: 'bold', minHeight: 30}}>
+                            <ListItemText primary={name} primaryTypographyProps={{fontSize: '12px'}}/>
                         </ListItem>
                     ))}
                 </List>
@@ -66,7 +66,7 @@ export default function LeaderSchedPreview({sched, setSched, page, setPage}) {
                 ))}
 
                 {[...Array(3)].map((_, ind) => {
-                    return <LeaderSchedPreviewCell key={ind} period={periods[ind]} 
+                    return <LeaderSchedPreviewCell key={ind} period={periods[ind]}
                                             keySlice={keys.slice(ind * 7, ind * 7 + 7)}
                                             sched={sched} />
                 })}

@@ -78,10 +78,10 @@ with open('base_schedule.csv', newline='') as csvfile:
         num_leaders = int(row[9])
 
         cursor.execute(sql, (timeslot, period_name, location, 'C' in divs, 'J' in divs, 'M' in divs, 'B' in divs, 'S' in divs,
-                        False, period_name == 'Ropes' or period_name == 'Tower', 
-                        period_name == 'Sailing' or period_name == 'Waterskiing', 
-                        period_name == 'Sailing', False, 
-                        period_name == 'Waterskiing', False, False,
+                        False, 'Ropes' in period_name or 'Tower' in period_name, 
+                        'Sailing' in period_name or 'Waterskiing' in period_name, 
+                        'Sailing' in period_name, False, 
+                        'Waterskiing' in period_name, False, False,
                         num_leaders, ''))
         conn.commit()
         

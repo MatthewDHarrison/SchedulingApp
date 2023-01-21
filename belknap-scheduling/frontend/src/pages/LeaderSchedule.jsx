@@ -2,8 +2,8 @@ import * as React from 'react';
 import { ApiCall } from "../components/ApiCall";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { Stack } from '@mui/material';
-import { Container, Draggable } from "react-smooth-dnd";
+import { Stack, Grid } from '@mui/material';
+import { Container  } from "react-smooth-dnd";
 import LeaderDailyDragSched from '../components/LeaderDailyDragSched';
 import LeaderSchedPreview from '../components/LeaderSchedPreview';
 
@@ -42,23 +42,28 @@ export default function LeaderSchedule() {
     if (loaded) {
         return (
             <Container component="main" maxWidth="xl">
-                <Box sx={{ flexGrow: 1, p: 2, mt: 10, mb: 20}}
-                    padding="40px"
-                    borderRadius="10px"
-                    backgroundColor="#ddd">
-                    {page === 7 ? <LeaderSchedPreview sched={sched} setSched={setSched} page={page} /> : <LeaderDailyDragSched sched={sched} setSched={setSched} page={page}/>}
+                <Grid container justifyContent="center">
+                    <Grid item>
+                        <Box maxWidth="lg" sx={{ flexGrow: 1, p: 2, mt: 10, mb: 20}}
+                            padding="40px"
+                            borderRadius="10px"
+                            backgroundColor="#ddd">
+                            {page === 7 ? <LeaderSchedPreview sched={sched} setSched={setSched} page={page} /> : <LeaderDailyDragSched sched={sched} setSched={setSched} page={page}/>}
 
-                    <Stack direction="row" spacing={2} sx={{mt: 5}}>
-                        {days.map((day, index) => (
-                            <Button key={index} variant="contained" onClick={() => {setPage(index)}}>
-                                {day}
-                            </Button>
-                        ))}
-                        <Button variant="contained" onClick={() => {setPage(7)}}>
-                            View Schedule Preview
-                        </Button>
-                    </Stack>
-                </Box>
+                            <Stack direction="row" spacing={2} sx={{mt: 5}}>
+                                {days.map((day, index) => (
+                                    <Button key={index} variant="contained" onClick={() => {setPage(index)}}>
+                                        {day}
+                                    </Button>
+                                ))}
+                                <Button variant="contained" onClick={() => {setPage(7)}}>
+                                    View Schedule Preview
+                                </Button>
+                            </Stack>
+                        </Box>
+                    </Grid>
+                </Grid>
+                
                 
             </Container>
 
